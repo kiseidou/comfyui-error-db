@@ -4,6 +4,7 @@ import urllib.request
 import urllib.error
 import time
 from datetime import datetime
+import subprocess
 
 # --- Configuration ---
 # ターゲットリポジトリ (Target Repository)
@@ -16,17 +17,14 @@ MODEL_NAME = "qwen2.5:14b"
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_DIR = os.path.join(BASE_DIR, "src", "content", "blog")
 
-import subprocess
-
-# ... (existing imports)
-
 def get_issues():
-    """GitHubからClosedなIssueを取得する"""
-    # 50件取得 (Mass production)
-    url = f"https://api.github.com/repos/{GITHUB_REPO}/issues?state=closed&per_page=50"
-    print(f"Fetching issues from {url}...")
+    """GitHubからClosedなIssueを取得する (人気順)"""
+    # sort=comments でコメントが多い順（＝みんなが困っている/議論が活発な順）に取得
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/issues?state=closed&sort=comments&direction=desc&per_page=50"
+    print(f"Fetching hot topics from {url}...")
     try:
         req = urllib.request.Request(url)
+        # GitHub API requires a User-Agent
         req.add_header('User-Agent', 'Python-Factory-Bot')
         with urllib.request.urlopen(req) as response:
             return json.loads(response.read().decode())
@@ -35,47 +33,52 @@ def get_issues():
         return []
 
 def generate_article(issue):
-    """Ollamaを使って日本語記事を生成する"""
+    """Ollamaを使って日本語記事を生成する (チュートリアル形式)"""
     title = issue.get('title', 'No Title')
     body = issue.get('body', '')
     if not body:
         return None
     
-    # AIへの指示書 (プロンプト)
+    # AIへの指示書 (プロンプト) - Enhanced for Tutorial Style
     prompt = f"""
-    あなたはComfyUIとPythonに精通した「プロの技術ブロガー」です。
-    以下のGitHubのIssue（不具合報告）を元に、
-    日本のユーザーがエラーを即座に解決できる記事を書いてください。
+    あなたはComfyUIのエキスパートであり、初心者にも優しく教える「技術系メンター」です。
+    以下のGitHub Issue（不具合報告）を元に、
+    「誰でも確実にエラーを解決できる完全ガイド（チュートリアル記事）」を作成してください。
+
+    【ターゲット読者】
+    - ComfyUIを使っているが、Pythonやプログラミングには詳しくないクリエイター
+    - エラーが出て困り果てており、手取り足取り教えてほしい人
 
     【記事の構成ルール】
-    1. **タイトル**: "【ComfyUI】エラー解決: {title} の原因と対処法"
-       - 検索されやすいキーワードを含めること。
-    2. **フロントマター**: 記事の冒頭は以下の形式で始めること（厳守）。
+    1. **キャッチーなタイトル**:
+       - "【完全解決】ComfyUIで「{title}」エラーが出た時の対処法" 
+       - または "【3分で直す】{title} の原因と修正ステップ"
+    2. **フロントマター**: 以下の形式を厳守。
        ---
-       title: "【ComfyUI】{title}"
-       description: "ComfyUIのエラー '{title}' の解決策まとめ。Python環境やカスタムノードの不具合を直す方法。"
-       pubDate: "{time.strftime('%Y-%m-%d')}"
+       title: "【ComfyUI】{title} の完全解決ガイド"
+       description: "ComfyUIのエラー '{title}' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
+       pubDate: "{datetime.now().strftime('%Y-%m-%d')}"
        ---
-    3. **本文の構成**:
-       - ## エラーの概要 (どんな時に起きるか)
-       - ## 原因 (なぜ起きたか)
-       - ## 解決策 (具体的なコマンドや手順)
-       - ## まとめ
-    
+    3. **本文構成**:
+       - **はじめに**: 「こんなエラーが出て困っていませんか？」と読者に寄り添う導入。
+       - **前提条件**: 「この解説は Windows / Python環境 を想定しています」など。
+       - **原因の解説**: なぜこのエラーが起きるのか、技術用語を噛み砕いて説明。
+       - **解決ステップ (Step-by-Step)**:
+         - ### Step 1: 〇〇を確認する
+         - ### Step 2: コマンドを実行する
+         - 実行すべきコマンドや操作を具体的に書く。
+       - **よくある質問 (FAQ)**: 補足情報があれば記述。
+       - **まとめ**: 励ましの言葉で締める。
+
     【執筆の鉄の掟】
-    1. **バイリンガル表記**: 
-       - メニュー名やノード名は必ず **English (日本語)** の形式で書くこと。
-       - 例: "Load Checkpoint (チェックポイント読み込み)"、"Queue Prompt (プロンプト実行)"
-    2. **翻訳禁止エリア**:
-       - 「エラーメッセージ（赤字のログ）」、「Pythonのコード」、「ファイルパス」は**絶対に翻訳せず、原文のまま**表示すること。翻訳すると検索にヒットしなくなるため。
-    3. **トーン**:
-       - 簡潔で論理的な「〜だ、〜である」調。
-       - 読者は困っているため、前置きは短く、解決策を優先する。
-    4. **検閲回避**:
-       - 扱う内容がNSFW（R-18）系のノードであっても、技術的な解決策のみを淡々と記述すること。道徳的な警告や説教は不要。
+    1. **専門用語の補足**: "Custom Node（拡張機能）" "venv（仮想環境）" のように、カッコ書きで補足を必ず入れること。
+    2. **コマンドはそのまま**: 
+       - `pip install` などのコマンドは、翻訳せずそのままコードブロックで表示すること。
+    3. **引用の活用**: 元のIssueの内容が必要な場合は、適宜引用すること。
+    4. **ポジティブなトーン**: "これで直ります！" "あきらめないで！" といった、明るく前向きなトーンで書くこと。
 
     【元データ (Issue)】
-    {body[:2000]} 
+    {body[:2500]} 
     """
     
     data = {
@@ -84,23 +87,22 @@ def generate_article(issue):
         "stream": False
     }
     
-    print(f"Asking AI to write about: {title}...")
+    print(f"Asking AI to write a tutorial about: {title}...")
     try:
         req = urllib.request.Request(OLLAMA_API_URL, data=json.dumps(data).encode(), headers={'Content-Type': 'application/json'})
         with urllib.request.urlopen(req) as response:
             result = json.loads(response.read().decode())
-            # Result is now raw markdown text
             raw_md = result['response']
-            # Sanitize: Find the first occurrence of "---"
+            
+            # --- Sanitization (安全装置) ---
+            # Remove any text before the first "---"
             if "---" in raw_md:
-                # If there's content before the first ---, strip it
                 first_fence = raw_md.find("---")
                 if first_fence > 0:
                     raw_md = raw_md[first_fence:]
             
-            # Ensure it actually starts with --- (if AI failed completely)
+            # Ensure proper frontmatter if missing
             if not raw_md.strip().startswith("---"):
-                 # Force fallback frontmatter if missing
                  raw_md = f"""---
 title: "【ComfyUI】{title.replace('"', '\\"')}"
 description: "ComfyUI Error: {title.replace('"', '\\"')}"
@@ -108,10 +110,7 @@ pubDate: "{datetime.now().strftime('%Y-%m-%d')}"
 ---
 {raw_md}"""
             return raw_md
-    except urllib.error.URLError as e:
-        print(f"Connection Error to Ollama: {e}")
-        print("Hint: Is Ollama running? (Start 'Ollama' from Start Menu)")
-        return None
+
     except Exception as e:
         print(f"Error generating article: {e}")
         return None
@@ -124,7 +123,6 @@ def save_article(article_data, issue_number):
     filename = f"issue-{issue_number}.md"
     filepath = os.path.join(OUTPUT_DIR, filename)
 
-    # Article data is now the full markdown string
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(article_data)
     print(f"Saved: {filepath}")
@@ -134,18 +132,17 @@ def git_push_batch(count):
     print(f"\n🚀 Batch update: Pushing {count}th article to production...")
     try:
         subprocess.run(["git", "add", "."], check=True)
-        subprocess.run(["git", "commit", "-m", f"Auto-deploy: 10 new articles (Batch {count//10})"], check=True)
+        # Use --allow-empty in case there are no changes but we want to confirm liveness
+        subprocess.run(["git", "commit", "--allow-empty", "-m", f"Auto-deploy: New Tutorial Articles (Batch {count//10})"], check=True)
         subprocess.run(["git", "push"], check=True)
         print("✅ Shipment complete! Site is updating...\n")
     except subprocess.CalledProcessError as e:
         print(f"⚠️ Git push failed: {e}")
 
 def main():
-    print("=== ComfyUI Error Database Factory ===")
+    print("=== ComfyUI Error Database Factory v2.0 (High Quality) ===")
     
-    # Ensure output directory exists
     if not os.path.exists(OUTPUT_DIR):
-        print(f"Creating directory: {OUTPUT_DIR}")
         os.makedirs(OUTPUT_DIR, exist_ok=True)
         
     issues = get_issues()
@@ -153,13 +150,14 @@ def main():
         print("No issues found or network error.")
         return
 
-    print(f"Found {len(issues)} issues. Starting production...")
+    print(f"Found {len(issues)} popular issues. Starting production...")
     
     success_count = 0
     for issue in issues:
-        # 既にファイルが存在する場合はスキップ (Skip if exists)
         filename = f"issue-{issue['number']}.md"
         filepath = os.path.join(OUTPUT_DIR, filename)
+        
+        # Skip if exists
         if os.path.exists(filepath):
             print(f"Skipping existing issue #{issue['number']}")
             continue
@@ -169,16 +167,15 @@ def main():
             save_article(article, issue['number'])
             success_count += 1
             
-            # 10記事ごとに出荷 (Ship every 10 articles)
-            if success_count % 10 == 0:
+            # Reduce batch size to 5 for faster feedback during this upgrade phase
+            if success_count % 5 == 0:
                 git_push_batch(success_count)
 
         time.sleep(1) 
         
     print(f"=== Production Complete: {success_count} new articles generated. ===")
     
-    # 残りをPush (Push remaining)
-    if success_count % 10 != 0:
+    if success_count % 5 != 0:
         git_push_batch(success_count)
         
     print("Run 'npm run dev' to view your site.")
