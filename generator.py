@@ -90,7 +90,24 @@ def generate_article(issue):
         with urllib.request.urlopen(req) as response:
             result = json.loads(response.read().decode())
             # Result is now raw markdown text
-            return result['response']
+            raw_md = result['response']
+            # Sanitize: Find the first occurrence of "---"
+            if "---" in raw_md:
+                # If there's content before the first ---, strip it
+                first_fence = raw_md.find("---")
+                if first_fence > 0:
+                    raw_md = raw_md[first_fence:]
+            
+            # Ensure it actually starts with --- (if AI failed completely)
+            if not raw_md.strip().startswith("---"):
+                 # Force fallback frontmatter if missing
+                 raw_md = f"""---
+title: "【ComfyUI】{title.replace('"', '\\"')}"
+description: "ComfyUI Error: {title.replace('"', '\\"')}"
+pubDate: "{datetime.now().strftime('%Y-%m-%d')}"
+---
+{raw_md}"""
+            return raw_md
     except urllib.error.URLError as e:
         print(f"Connection Error to Ollama: {e}")
         print("Hint: Is Ollama running? (Start 'Ollama' from Start Menu)")
