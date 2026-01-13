@@ -11,7 +11,7 @@ GITHUB_REPO = "comfyanonymous/ComfyUI"
 # Ollamaのエンドポイント (Ollama Endpoint)
 OLLAMA_API_URL = "http://localhost:11434/api/generate"
 # 使用するモデル (Model Name) - Make sure to run 'ollama pull llama3' first!
-MODEL_NAME = "llama3" 
+MODEL_NAME = "qwen2.5:14b" 
 # 記事の保存先 (Output Directory)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_DIR = os.path.join(BASE_DIR, "src", "content", "blog")
