@@ -37,33 +37,46 @@ def generate_article(issue):
     if not body:
         return None
     
-    # AIへの指示書 (Prompt)
+    # AIへの指示書 (プロンプト)
     prompt = f"""
-    You are a technical writer managing a blog about ComfyUI error solutions.
-    Analyze the following GitHub Issue and output the result in JSON format.
+    あなたはComfyUIとPythonに精通した「プロの技術ブロガー」です。
+    以下のGitHubのIssue（不具合報告）を元に、
+    日本のユーザーがエラーを即座に解決できる記事を書いてください。
+
+    【記事の構成ルール】
+    1. **タイトル**: "【ComfyUI】エラー解決: {title} の原因と対処法"
+       - 検索されやすいキーワードを含めること。
+    2. **フロントマター**: 記事の冒頭は以下の形式で始めること（厳守）。
+       ---
+       title: "【ComfyUI】{title}"
+       description: "ComfyUIのエラー '{title}' の解決策まとめ。Python環境やカスタムノードの不具合を直す方法。"
+       pubDate: "{time.strftime('%Y-%m-%d')}"
+       ---
+    3. **本文の構成**:
+       - ## エラーの概要 (どんな時に起きるか)
+       - ## 原因 (なぜ起きたか)
+       - ## 解決策 (具体的なコマンドや手順)
+       - ## まとめ
     
-    Issue Title: {title}
-    Issue Body: {body}
-    
-    Task:
-    1. Identify the 'Cause of Error' (エラーの原因).
-    2. Identify the 'Solution' (解決策).
-    3. Create a catchy Japanese blog title (title).
-    4. Write a 50-character Japanese summary (description).
-    5. Compose the full blog post in Japanese Markdown (content_markdown). Use headers (## causes, ## solutions).
-    
-    Output Format (JSON Only):
-    {{
-        "title": "...",
-        "description": "...",
-        "content_markdown": "..."
-    }}
+    【執筆の鉄の掟】
+    1. **バイリンガル表記**: 
+       - メニュー名やノード名は必ず **English (日本語)** の形式で書くこと。
+       - 例: "Load Checkpoint (チェックポイント読み込み)"、"Queue Prompt (プロンプト実行)"
+    2. **翻訳禁止エリア**:
+       - 「エラーメッセージ（赤字のログ）」、「Pythonのコード」、「ファイルパス」は**絶対に翻訳せず、原文のまま**表示すること。翻訳すると検索にヒットしなくなるため。
+    3. **トーン**:
+       - 簡潔で論理的な「〜だ、〜である」調。
+       - 読者は困っているため、前置きは短く、解決策を優先する。
+    4. **検閲回避**:
+       - 扱う内容がNSFW（R-18）系のノードであっても、技術的な解決策のみを淡々と記述すること。道徳的な警告や説教は不要。
+
+    【元データ (Issue)】
+    {body[:2000]} 
     """
     
     data = {
         "model": MODEL_NAME,
         "prompt": prompt,
-        "format": "json",
         "stream": False
     }
     
@@ -72,9 +85,8 @@ def generate_article(issue):
         req = urllib.request.Request(OLLAMA_API_URL, data=json.dumps(data).encode(), headers={'Content-Type': 'application/json'})
         with urllib.request.urlopen(req) as response:
             result = json.loads(response.read().decode())
-            # Parse the JSON inside the response text
-            ai_response_text = result['response']
-            return json.loads(ai_response_text)
+            # Result is now raw markdown text
+            return result['response']
     except urllib.error.URLError as e:
         print(f"Connection Error to Ollama: {e}")
         print("Hint: Is Ollama running? (Start 'Ollama' from Start Menu)")
@@ -88,28 +100,12 @@ def save_article(article_data, issue_number):
     if not article_data:
         return
 
-    today = datetime.now().strftime('%Y-%m-%d')
-    safe_title = "".join([c for c in article_data['title'] if c.isalnum() or c in (' ', '-', '_')]).strip()
     filename = f"issue-{issue_number}.md"
     filepath = os.path.join(OUTPUT_DIR, filename)
-    
-    # Astro Blog Frontmatter
-    md_content = f"""---
-title: '{article_data['title']}'
-description: '{article_data['description']}'
-pubDate: '{today}'
----
 
-{article_data['content_markdown']}
-
-<br>
-
----
-*この記事はAIによって自動生成されました。 [元のIssue #{issue_number}](https://github.com/{GITHUB_REPO}/issues/{issue_number})*
-"""
-    
+    # Article data is now the full markdown string
     with open(filepath, 'w', encoding='utf-8') as f:
-        f.write(md_content)
+        f.write(article_data)
     print(f"Saved: {filepath}")
 
 def main():
