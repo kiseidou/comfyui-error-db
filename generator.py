@@ -16,10 +16,14 @@ MODEL_NAME = "qwen2.5:14b"
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_DIR = os.path.join(BASE_DIR, "src", "content", "blog")
 
+import subprocess
+
+# ... (existing imports)
+
 def get_issues():
     """GitHubからClosedなIssueを取得する"""
-    # 5件だけ取得 (Start small)
-    url = f"https://api.github.com/repos/{GITHUB_REPO}/issues?state=closed&per_page=5"
+    # 50件取得 (Mass production)
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/issues?state=closed&per_page=50"
     print(f"Fetching issues from {url}...")
     try:
         req = urllib.request.Request(url)
@@ -108,6 +112,17 @@ def save_article(article_data, issue_number):
         f.write(article_data)
     print(f"Saved: {filepath}")
 
+def git_push_batch(count):
+    """記事をGitHubにPushしてCloudflare Pagesの更新をトリガーする"""
+    print(f"\n🚀 Batch update: Pushing {count}th article to production...")
+    try:
+        subprocess.run(["git", "add", "."], check=True)
+        subprocess.run(["git", "commit", "-m", f"Auto-deploy: 10 new articles (Batch {count//10})"], check=True)
+        subprocess.run(["git", "push"], check=True)
+        print("✅ Shipment complete! Site is updating...\n")
+    except subprocess.CalledProcessError as e:
+        print(f"⚠️ Git push failed: {e}")
+
 def main():
     print("=== ComfyUI Error Database Factory ===")
     
@@ -125,13 +140,30 @@ def main():
     
     success_count = 0
     for issue in issues:
+        # 既にファイルが存在する場合はスキップ (Skip if exists)
+        filename = f"issue-{issue['number']}.md"
+        filepath = os.path.join(OUTPUT_DIR, filename)
+        if os.path.exists(filepath):
+            print(f"Skipping existing issue #{issue['number']}")
+            continue
+
         article = generate_article(issue)
         if article:
             save_article(article, issue['number'])
             success_count += 1
+            
+            # 10記事ごとに出荷 (Ship every 10 articles)
+            if success_count % 10 == 0:
+                git_push_batch(success_count)
+
         time.sleep(1) 
         
-    print(f"=== Production Complete: {success_count} articles generated. ===")
+    print(f"=== Production Complete: {success_count} new articles generated. ===")
+    
+    # 残りをPush (Push remaining)
+    if success_count % 10 != 0:
+        git_push_batch(success_count)
+        
     print("Run 'npm run dev' to view your site.")
 
 if __name__ == "__main__":
