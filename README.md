@@ -60,4 +60,6 @@ Check out [our documentation](https://docs.astro.build) or jump into our [Discor
 ## Credit
 
 This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
-"# comfyui-error-db" 
+"# ComfyUI Error Database
+![Last Deployed](https://img.shields.io/badge/Last_Deployed-2026--01--13-green)
+"
