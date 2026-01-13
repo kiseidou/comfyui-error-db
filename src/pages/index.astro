@@ -43,17 +43,22 @@ const posts = (await getCollection('blog')).sort(
 			const searchInput = document.getElementById('search');
 			const articles = document.querySelectorAll('.article-card');
 
-			searchInput.addEventListener('input', (e) => {
-				const term = e.target.value.toLowerCase();
-				articles.forEach(article => {
-					const title = article.getAttribute('data-title');
-					if (title.includes(term)) {
-						article.style.display = 'block';
-					} else {
-						article.style.display = 'none';
-					}
+			if (searchInput) {
+				searchInput.addEventListener('input', (e) => {
+					// @ts-ignore
+					const term = e.target.value.toLowerCase();
+					articles.forEach(article => {
+						const title = article.getAttribute('data-title');
+						if (title && title.includes(term)) {
+							// @ts-ignore
+							article.style.display = 'block';
+						} else {
+							// @ts-ignore
+							article.style.display = 'none';
+						}
+					});
 				});
-			});
+			}
 		</script>
 	</body>
 </html>

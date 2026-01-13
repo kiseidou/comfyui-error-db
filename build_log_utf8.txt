@@ -1,0 +1,27 @@
+﻿
+> comfyui-error-db@0.0.1 build
+> astro build
+
+[2m16:57:38[22m [34m[content][39m Syncing content
+[2m16:57:38[22m [34m[content][39m Synced content
+[2m16:57:38[22m [34m[types][39m Generated [2m246ms[22m
+[2m16:57:38[22m [34m[build][39m output: [34m"static"[39m
+[2m16:57:38[22m [34m[build][39m mode: [34m"static"[39m
+[2m16:57:38[22m [34m[build][39m directory: [34mD:\ANTIGRAVITY\comfyui-error-db\dist\[39m
+[2m16:57:38[22m [34m[build][39m Collecting build info...
+[2m16:57:38[22m [34m[build][39m [32m笨・Completed in 258ms.[39m
+[2m16:57:38[22m [34m[build][39m Building static entrypoints...
+[2m16:57:38[22m [34m[vite][39m [32m笨・built in 471ms[39m
+[2m16:57:38[22m [34m[build][39m [32m笨・Completed in 489ms.[39m
+
+[42m[30m building client (vite) [39m[49m
+[2m16:57:38[22m [34m[vite][39m transforming...
+[2m16:57:38[22m [34m[vite][39m [32m笨・[39m 2 modules transformed.
+[2m16:57:38[22m [34m[vite][39m rendering chunks...
+[2m16:57:38[22m [34m[vite][39m [32m笨・built in 8ms[39m
+
+[42m[30m generating static routes [39m[49m
+[2m16:57:38[22m [32m笆ｶ[39m src/pages/about.astro
+[2m16:57:38[22m   [34m笏披楳[39m [2m/about/index.html[22m [2m(+6ms)[22m 
+[2m16:57:38[22m [32m笆ｶ[39m src/pages/blog/index.astro
+[2m16:57:38[22m   [34m笏披楳[39m [2m/blog/index.html[22m
