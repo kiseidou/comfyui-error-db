@@ -101,6 +101,9 @@ def generate_article(issue):
                 if first_fence > 0:
                     raw_md = raw_md[first_fence:]
             
+            # Common AI hallucination fix: Remove markdown bolding from keys
+            raw_md = raw_md.replace('**title:**', 'title:').replace('**description:**', 'description:').replace('**pubDate:**', 'pubDate:')
+            
             # Ensure proper frontmatter if missing
             if not raw_md.strip().startswith("---"):
                  raw_md = f"""---
