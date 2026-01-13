@@ -21,12 +21,16 @@ const posts = (await getCollection('blog')).sort(
 			<h1>🔍 エラー解決データベース</h1>
 			<p>ComfyUIのエラーと解決策をAIが24時間体制で収集・翻訳しています。</p>
 			
-			<div style="margin-top: 2rem;">
+			<div style="margin-bottom: 2rem;">
+				<input type="text" id="search" placeholder="エラーメッセージやキーワードで検索..." style="width: 100%; padding: 10px; font-size: 16px; border-radius: 8px; border: 1px solid #30363d; background: #0d1117; color: white;">
+			</div>
+
+			<div id="article-list" style="margin-top: 2rem;">
 				{posts.map((post) => (
-					<div style="border: 1px solid #333; padding: 1rem; margin-bottom: 1rem; border-radius: 8px;">
-						<a href={`/blog/${post.slug}/`} style="text-decoration: none; color: inherit;">
-							<h3 style="margin: 0;">{post.data.title}</h3>
-							<p style="margin: 0.5rem 0 0; font-size: 0.9rem; color: #888;">
+					<div class="article-card" data-title={post.data.title.toLowerCase()} style="border: 1px solid #30363d; padding: 1rem; margin-bottom: 1rem; border-radius: 8px; background: #161b22;">
+						<a href={`/blog/${post.slug}/`} style="text-decoration: none; color: inherit; display: block;">
+							<h3 style="margin: 0; color: #58a6ff;">{post.data.title}</h3>
+							<p style="margin: 0.5rem 0 0; font-size: 0.9rem; color: #8b949e;">
 								{post.data.pubDate.toLocaleDateString('ja-JP')}
 							</p>
 						</a>
@@ -35,5 +39,21 @@ const posts = (await getCollection('blog')).sort(
 			</div>
 		</main>
 		<Footer />
+		<script>
+			const searchInput = document.getElementById('search');
+			const articles = document.querySelectorAll('.article-card');
+
+			searchInput.addEventListener('input', (e) => {
+				const term = e.target.value.toLowerCase();
+				articles.forEach(article => {
+					const title = article.getAttribute('data-title');
+					if (title.includes(term)) {
+						article.style.display = 'block';
+					} else {
+						article.style.display = 'none';
+					}
+				});
+			});
+		</script>
 	</body>
 </html>
