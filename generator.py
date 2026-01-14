@@ -20,7 +20,7 @@ OUTPUT_DIR = os.path.join(BASE_DIR, "src", "content", "blog")
 def get_issues():
     """GitHubからClosedなIssueを取得する (人気順)"""
     # sort=comments でコメントが多い順（＝みんなが困っている/議論が活発な順）に取得
-    url = f"https://api.github.com/repos/{GITHUB_REPO}/issues?state=closed&sort=comments&direction=desc&per_page=50"
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/issues?state=closed&sort=comments&direction=desc&per_page=100"
     print(f"Fetching hot topics from {url}...")
     try:
         req = urllib.request.Request(url)
@@ -59,6 +59,11 @@ def generate_article(issue):
        description: "ComfyUIのエラー '{title}' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
        pubDate: "{datetime.now().strftime('%Y-%m-%d')}"
        ---
+       title: "【ComfyUI】{title} の完全解決ガイド"
+       description: "ComfyUIのエラー '{title}' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
+       pubDate: "{datetime.now().strftime('%Y-%m-%d')}"
+       ---
+       ※注意: キー名（title, descriptionなど）は絶対に太字(**)にしないでください。正しいYAML形式を守ってください。
     3. **本文構成**:
        - **はじめに**: 「こんなエラーが出て困っていませんか？」と読者に寄り添う導入。
        - **前提条件**: 「この解説は Windows / Python環境 を想定しています」など。
