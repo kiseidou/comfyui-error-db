@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="ComfyUI Error Database" href="https://comfyui-error-db.pages.dev/rss.xml"><meta name="generator" content="Astro v5.16.9"><!-- Font preloads --><link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://comfyui-error-db.pages.dev/blog/ja/issue-7383/"><!-- Primary Meta Tags --><title>【ComfyUI】LOW RES PREVIEW IN NODE の完全解決ガイド</title><meta name="title" content="【ComfyUI】LOW RES PREVIEW IN NODE の完全解決ガイド"><meta name="description" content="ComfyUIのエラー 'LOW RES PREVIEW IN NODE' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://comfyui-error-db.pages.dev/blog/ja/issue-7383/"><meta property="og:title" content="【ComfyUI】LOW RES PREVIEW IN NODE の完全解決ガイド"><meta property="og:description" content="ComfyUIのエラー 'LOW RES PREVIEW IN NODE' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://comfyui-error-db.pages.dev/blog/ja/issue-7383/"><meta property="twitter:title" content="【ComfyUI】LOW RES PREVIEW IN NODE の完全解決ガイド"><meta property="twitter:description" content="ComfyUIのエラー 'LOW RES PREVIEW IN NODE' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"><script type="module">document.addEventListener("DOMContentLoaded",()=>{document.querySelectorAll("pre").forEach(t=>{if(t.querySelector(".copy-btn"))return;const e=document.createElement("button");e.className="copy-btn",e.innerText="Copy",e.addEventListener("click",()=>{const n=t.querySelector("code")?.innerText||t.innerText;navigator.clipboard.writeText(n).then(()=>{e.innerText="Copied!",setTimeout(()=>e.innerText="Copy",2e3)})}),t.style.position="relative",t.appendChild(e)})});</script><style>:root{--accent: 136, 58, 234;--accent-light: 224, 204, 250;--accent-dark: 49, 10, 101;--black: 13, 17, 23;--gray: 230, 237, 243;--gray-light: 240, 246, 252;--gray-dark: 33, 38, 45;--gray-accent: 48, 54, 61;--font-body: "Helvetica Neue", Arial, sans-serif}body{font-family:var(--font-body);margin:0;padding:0;text-align:left;background:rgb(var(--black));color:rgb(var(--gray));font-size:18px;line-height:1.8;display:flex;flex-direction:column;min-height:100vh}main{width:960px;max-width:calc(100% - 2em);margin:0 auto;padding:3em 1em}h1,h2,h3,h4,h5,h6{margin:0 0 .5rem;color:rgb(var(--gray-light));line-height:1.2}h1{font-size:2.5em;background:linear-gradient(to right,#a78bfa,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5em}h2{font-size:1.8em;border-bottom:2px solid rgb(var(--gray-accent));padding-bottom:.3em;margin-top:2em;margin-bottom:1em;color:rgb(var(--gray-light))}h3{color:rgb(var(--gray-light));margin-top:1.5em}ul{padding:0;list-style:none}li{margin-bottom:2rem}a{color:#58a6ff;text-decoration:none;transition:all .2s ease}a:hover{color:#79c0ff;text-decoration:underline}li a{display:block;background:rgb(var(--gray-dark));padding:1.5rem;border-radius:12px;border:1px solid rgb(var(--gray-accent));box-shadow:0 4px 6px #0000004d}li a:hover{transform:translateY(-2px);box-shadow:0 8px 12px #0006;border-color:#58a6ff;text-decoration:none}.title{font-size:1.5em;color:rgb(var(--gray-light));margin-bottom:.5rem;display:block;font-weight:700}.date{color:rgb(var(--gray));font-size:.9em}code{padding:2px 5px;background-color:rgb(var(--gray-accent));color:rgb(var(--gray-light));border-radius:4px;font-family:Consolas,Monaco,Andale Mono,monospace}pre{padding:1.5em;background-color:#0d1117!important;border-radius:8px;border:1px solid #30363d;overflow-x:auto;font-size:.9em;color:#c9d1d9}img{max-width:100%;border-radius:8px}.copy-btn[data-astro-cid-y4licvga]{position:absolute;top:5px;right:5px;background:#238636;color:#fff;border:none;padding:4px 8px;border-radius:4px;cursor:pointer;font-size:12px;opacity:.8}.copy-btn[data-astro-cid-y4licvga]:hover{opacity:1}pre[data-astro-cid-y4licvga]{position:relative}footer[data-astro-cid-sz7xmlte]{padding:2em 1em 6em;background:transparent;color:#8b949e;text-align:center;border-top:1px solid #30363d;margin-top:4rem}header[data-astro-cid-3ef6ksr2]{margin:0;padding:0 1em;background:#0d1117;box-shadow:0 2px 8px #0006;border-bottom:1px solid #30363d}h2[data-astro-cid-3ef6ksr2]{margin:0;font-size:1em}h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2],h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none;color:#fff}nav[data-astro-cid-3ef6ksr2]{display:flex;align-items:center;justify-content:space-between;height:60px}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{padding:1em .5em;color:#c9d1d9;border-bottom:4px solid transparent;text-decoration:none}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none;border-bottom-color:#58a6ff;color:#fff}
+main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.hero-image[data-astro-cid-bvzihdzo]{width:100%}.hero-image[data-astro-cid-bvzihdzo] img[data-astro-cid-bvzihdzo]{display:block;margin:0 auto;border-radius:12px;box-shadow:var(--box-shadow)}.prose[data-astro-cid-bvzihdzo]{width:720px;max-width:calc(100% - 2em);margin:auto;padding:1em;color:rgb(var(--gray))}.title[data-astro-cid-bvzihdzo]{margin-bottom:1em;padding:1em 0;text-align:center;line-height:1}.title[data-astro-cid-bvzihdzo] h1[data-astro-cid-bvzihdzo]{margin:0 0 .5em}.date[data-astro-cid-bvzihdzo]{margin-bottom:.5em;color:rgb(var(--gray))}.last-updated-on[data-astro-cid-bvzihdzo]{font-style:italic}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>ComfyUI Error Database</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>JP</a> <a href="/en/" data-astro-cid-3ef6ksr2>EN</a> <a href="/zh/" data-astro-cid-3ef6ksr2>ZH</a> <a href="https://github.com/withastro/astro-blog-template" data-astro-cid-3ef6ksr2>GitHub</a> </div> </nav> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo>  </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2026-01-14T00:00:00.000Z"> Jan 14, 2026 </time>  </div> <h1 data-astro-cid-bvzihdzo>【ComfyUI】LOW RES PREVIEW IN NODE の完全解決ガイド</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2 id="はじめに">はじめに</h2>
+<p>こんにちは！ComfyUIを使っている皆さん、特にPythonやプログラミングが詳しくないクリエイターのみなさんへ。今日は、「LOW RES PREVIEW IN NODE」のエラーについてお話しします。このエラーは画像生成時に予想よりも低い解像度でプレビュー表示される問題を引き起こすことがあります。しかし、その原因と対処法を理解すれば簡単に解決できるので、安心してください。</p>
+<h2 id="原因の解説">原因の解説</h2>
+<p>「LOW RES PREVIEW IN NODE」のエラーは、ComfyUI内で特定のノード（特にksamplerなど）が低い解像度でプレビュー画像を表示してしまう問題です。この状況は、以下の要因によって引き起こされます。</p>
+<ol>
+<li><strong>設定ミス</strong>：プレビュー用のノードや設定が誤って変更されている可能性があります。</li>
+<li><strong>ソフトウェア更新</strong>：最近ComfyUIの再インストールを行った場合など、アップデートに伴う変更が原因となることがあります。</li>
+<li><strong>コンフリクト</strong>: ComfyUI内部で複数のノードが相互作用し、一部の設定を上書きしてしまっている可能性があります。</li>
+</ol>
+<h2 id="解決ステップ-step-by-step">解決ステップ (Step-by-Step)</h2>
+<p>では、実際にこの問題を解決するためにはどうすれば良いのでしょうか？以下の手順に従って進めてみてください。初心者でも安心してできる手順です。</p>
+<h3 id="step-1-ファイルの確認">Step 1: ファイルの確認</h3>
+<ol>
+<li><strong>ComfyUIの設定ファイル</strong>：<code>config.py</code>やその他の関連ファイルを確認し、必要に応じて初期化するか元のバージョンに戻します。
+<ul>
+<li>通常はインストールディレクトリにある<code>/comfyui/config.py</code>を開くことでチェックできます。</li>
+</ul>
+</li>
+</ol>
+<h3 id="step-2-ノード設定の再構成">Step 2: ノード設定の再構成</h3>
+<ol>
+<li>
+<p><strong>ノード接続を確認</strong>：それぞれのノードが正しく接続されていることを確認してください。</p>
+<ul>
+<li>特にksamplerなどの重要なノードは他のノードと適切につながっている必要があります。</li>
+</ul>
+</li>
+<li>
+<p><strong>プロパティの調整</strong>: 各ノードの「Preview Resolution」設定を確認し、必要であれば元に戻します。</p>
+</li>
+</ol>
+<h3 id="step-3-comfyuiの再インストール">Step 3: ComfyUIの再インストール</h3>
+<ol>
+<li>カレントのComfyUIフォルダを削除またはアーカイブします。</li>
+<li>安心して公式サイトから最新版をダウンロード、インストールしてください。
+<ul>
+<li>公式ウェブサイト：<a href="https://comfyui.github.io/">https://comfyui.github.io/</a></li>
+</ul>
+</li>
+</ol>
+<h3 id="step-4-エンコーダーの再設定">Step 4: エンコーダーの再設定</h3>
+<ol>
+<li><strong>エンコーダーを再インストール</strong>: 特にTAESDエンコーダーや他の重要なエンコーダーは、必ず最新版を使用するようにしてください。</li>
+</ol>
+<h3 id="step-5-動作確認">Step 5: 動作確認</h3>
+<p>最後に、ComfyUIが正常に動作していることを確認します。新しく生成した画像のプレビューが正しく表示されているかをチェックしましょう！</p>
+<h2 id="まとめ">まとめ</h2>
+<p>エラーは一見複雑に見えますが、正しい手順を踏めば簡単に解決できます。設定ファイルのチェックから再インストールまで、一つずつ進めることで必ずクリアすることができます。</p>
+<p>もし問題が続いた場合は、ComfyUIのフォーラムやコミュニティに質問すると詳しい方からの助けが得られることがあります。頑張って進めてみてくださいね！</p>
+<p>以上、「LOW RES PREVIEW IN NODE」の完全解決ガイドでした。皆さんの創作活動がよりスムーズになることを願っています！</p>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2026 ComfyUI Error Database. All rights reserved.
+<br data-astro-cid-sz7xmlte> <a href="/privacy-policy" style="font-size: 0.8em; color: #58a6ff; text-decoration: none;" data-astro-cid-sz7xmlte>Privacy Policy</a> </footer>  </body></html>

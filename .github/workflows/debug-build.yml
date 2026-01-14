@@ -17,10 +17,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-          cache: 'npm'
           
       - name: Install Dependencies
-        run: npm install
+        run: npm install --no-package-lock
         
       - name: Clean Output
         run: rm -rf dist .astro

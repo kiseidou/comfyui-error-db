@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="ComfyUI Error Database" href="https://comfyui-error-db.pages.dev/rss.xml"><meta name="generator" content="Astro v5.16.9"><!-- Font preloads --><link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://comfyui-error-db.pages.dev/blog/ja/issue-10862/"><!-- Primary Meta Tags --><title>【ComfyUI】CUDA error : invalid argument の完全解決ガイド</title><meta name="title" content="【ComfyUI】CUDA error : invalid argument の完全解決ガイド"><meta name="description" content="ComfyUIのエラー 'CUDA error : invalid argument' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://comfyui-error-db.pages.dev/blog/ja/issue-10862/"><meta property="og:title" content="【ComfyUI】CUDA error : invalid argument の完全解決ガイド"><meta property="og:description" content="ComfyUIのエラー 'CUDA error : invalid argument' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://comfyui-error-db.pages.dev/blog/ja/issue-10862/"><meta property="twitter:title" content="【ComfyUI】CUDA error : invalid argument の完全解決ガイド"><meta property="twitter:description" content="ComfyUIのエラー 'CUDA error : invalid argument' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"><script type="module">document.addEventListener("DOMContentLoaded",()=>{document.querySelectorAll("pre").forEach(t=>{if(t.querySelector(".copy-btn"))return;const e=document.createElement("button");e.className="copy-btn",e.innerText="Copy",e.addEventListener("click",()=>{const n=t.querySelector("code")?.innerText||t.innerText;navigator.clipboard.writeText(n).then(()=>{e.innerText="Copied!",setTimeout(()=>e.innerText="Copy",2e3)})}),t.style.position="relative",t.appendChild(e)})});</script><style>:root{--accent: 136, 58, 234;--accent-light: 224, 204, 250;--accent-dark: 49, 10, 101;--black: 13, 17, 23;--gray: 230, 237, 243;--gray-light: 240, 246, 252;--gray-dark: 33, 38, 45;--gray-accent: 48, 54, 61;--font-body: "Helvetica Neue", Arial, sans-serif}body{font-family:var(--font-body);margin:0;padding:0;text-align:left;background:rgb(var(--black));color:rgb(var(--gray));font-size:18px;line-height:1.8;display:flex;flex-direction:column;min-height:100vh}main{width:960px;max-width:calc(100% - 2em);margin:0 auto;padding:3em 1em}h1,h2,h3,h4,h5,h6{margin:0 0 .5rem;color:rgb(var(--gray-light));line-height:1.2}h1{font-size:2.5em;background:linear-gradient(to right,#a78bfa,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5em}h2{font-size:1.8em;border-bottom:2px solid rgb(var(--gray-accent));padding-bottom:.3em;margin-top:2em;margin-bottom:1em;color:rgb(var(--gray-light))}h3{color:rgb(var(--gray-light));margin-top:1.5em}ul{padding:0;list-style:none}li{margin-bottom:2rem}a{color:#58a6ff;text-decoration:none;transition:all .2s ease}a:hover{color:#79c0ff;text-decoration:underline}li a{display:block;background:rgb(var(--gray-dark));padding:1.5rem;border-radius:12px;border:1px solid rgb(var(--gray-accent));box-shadow:0 4px 6px #0000004d}li a:hover{transform:translateY(-2px);box-shadow:0 8px 12px #0006;border-color:#58a6ff;text-decoration:none}.title{font-size:1.5em;color:rgb(var(--gray-light));margin-bottom:.5rem;display:block;font-weight:700}.date{color:rgb(var(--gray));font-size:.9em}code{padding:2px 5px;background-color:rgb(var(--gray-accent));color:rgb(var(--gray-light));border-radius:4px;font-family:Consolas,Monaco,Andale Mono,monospace}pre{padding:1.5em;background-color:#0d1117!important;border-radius:8px;border:1px solid #30363d;overflow-x:auto;font-size:.9em;color:#c9d1d9}img{max-width:100%;border-radius:8px}.copy-btn[data-astro-cid-y4licvga]{position:absolute;top:5px;right:5px;background:#238636;color:#fff;border:none;padding:4px 8px;border-radius:4px;cursor:pointer;font-size:12px;opacity:.8}.copy-btn[data-astro-cid-y4licvga]:hover{opacity:1}pre[data-astro-cid-y4licvga]{position:relative}footer[data-astro-cid-sz7xmlte]{padding:2em 1em 6em;background:transparent;color:#8b949e;text-align:center;border-top:1px solid #30363d;margin-top:4rem}header[data-astro-cid-3ef6ksr2]{margin:0;padding:0 1em;background:#0d1117;box-shadow:0 2px 8px #0006;border-bottom:1px solid #30363d}h2[data-astro-cid-3ef6ksr2]{margin:0;font-size:1em}h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2],h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none;color:#fff}nav[data-astro-cid-3ef6ksr2]{display:flex;align-items:center;justify-content:space-between;height:60px}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{padding:1em .5em;color:#c9d1d9;border-bottom:4px solid transparent;text-decoration:none}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none;border-bottom-color:#58a6ff;color:#fff}
+main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.hero-image[data-astro-cid-bvzihdzo]{width:100%}.hero-image[data-astro-cid-bvzihdzo] img[data-astro-cid-bvzihdzo]{display:block;margin:0 auto;border-radius:12px;box-shadow:var(--box-shadow)}.prose[data-astro-cid-bvzihdzo]{width:720px;max-width:calc(100% - 2em);margin:auto;padding:1em;color:rgb(var(--gray))}.title[data-astro-cid-bvzihdzo]{margin-bottom:1em;padding:1em 0;text-align:center;line-height:1}.title[data-astro-cid-bvzihdzo] h1[data-astro-cid-bvzihdzo]{margin:0 0 .5em}.date[data-astro-cid-bvzihdzo]{margin-bottom:.5em;color:rgb(var(--gray))}.last-updated-on[data-astro-cid-bvzihdzo]{font-style:italic}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>ComfyUI Error Database</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>JP</a> <a href="/en/" data-astro-cid-3ef6ksr2>EN</a> <a href="/zh/" data-astro-cid-3ef6ksr2>ZH</a> <a href="https://github.com/withastro/astro-blog-template" data-astro-cid-3ef6ksr2>GitHub</a> </div> </nav> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo>  </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2026-01-13T00:00:00.000Z"> Jan 13, 2026 </time>  </div> <h1 data-astro-cid-bvzihdzo>【ComfyUI】CUDA error : invalid argument の完全解決ガイド</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2 id="はじめに">はじめに</h2>
+<p>こんにちは！ComfyUIを使っていて「CUDA error : invalid argument」エラーが出たことがある方、多いですよね？この記事では、そのエラーを手軽に解決する方法を詳しく解説します。Pythonやプログラミングが苦手なクリエイターさんでも安心して読み進めることができますよ！</p>
+<h2 id="前提条件">前提条件</h2>
+<ul>
+<li>この記事は <strong>Windows</strong> や Python環境 を想定しています。</li>
+<li>仮想環境（venv）の利用推奨。</li>
+</ul>
+<h2 id="問題の原因について">問題の原因について</h2>
+<p>ComfyUIで「CUDA error : invalid argument」が出る主な理由は、CUDAが使用するGPUメモリに問題がある場合や、Pythonスクリプト内でCUDAライブラリを使用しているNode (Custom Node) が適切に設定されていないことが考えられます。</p>
+<p>このエラーは特定のワークフロー（例えばqwen-image-2509 + Lightning 8stp 1.1 + LoRA）を複数回実行する際に発生し、原因は大抵はPythonスクリプト内でGPUメモリが適切に解放されていない場合が多いです。特にGPUがRTX 4070 Superのような中級的な性能のものであると、メモリ管理には注意が必要です。</p>
+<h2 id="解決ステップ-step-by-step">解決ステップ (Step-by-Step)</h2>
+<h3 id="step-1-ワークフローを再起動する">Step 1: ワークフローを再起動する</h3>
+<p>まず最初に、問題の発生しているワークフロー全体を一度止めてから再開してください。これはメモリが適切な状態で解放されていることを確認するためです。</p>
+<h3 id="step-2-pythonスクリプト内で適切なメモリ管理を行うコマンドを実行する">Step 2: Pythonスクリプト内で適切なメモリ管理を行うコマンドを実行する</h3>
+<p>問題の発生しているワークフローで使用されているPythonスクリプトを見直し、各セクションの最後に<code>torch.cuda.empty_cache()</code>と記述します。これはCUDAカーネルが使ったRAMやVRAM（GPUメモリ）を解放するコマンドです。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> torch</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># ワークフローの処理部分</span></span>
+<span class="line"><span style="color:#79B8FF">...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D"># 各セクションの終わりに以下を追加する</span></span>
+<span class="line"><span style="color:#E1E4E8">torch.cuda.empty_cache()</span></span></code></pre>
+<h3 id="step-3-環境変数cuda_launch_blocking1で実行する">Step 3: 環境変数CUDA_LAUNCH_BLOCKING=1で実行する</h3>
+<p>デバッグのために環境変数 <code>CUDA_LAUNCH_BLOCKING</code> を設定して、CUDAエラーが発生した際に即座に停止し、その時点でのスタックトレースを確認します。これにより、具体的な問題箇所の特定が容易になります。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cmd"><code><span class="line"><span style="color:#F97583">set </span><span style="color:#E1E4E8">CUDA_LAUNCH_BLOCKING</span><span style="color:#F97583">=</span><span style="color:#79B8FF">1</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#E1E4E8"> comfyui.exe</span></span></code></pre>
+<h3 id="step-4-カスタムノードの再インストール">Step 4: カスタムノードの再インストール</h3>
+<p>カスタムノード (Custom Node) の設定に問題がある場合があります。以下のように、まずはカスタムノードを一度全て削除し、再度インストールします。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cmd"><code><span class="line"><span style="color:#E1E4E8"># 仮想環境を有効化する</span></span>
+<span class="line"><span style="color:#E1E4E8">.\venv\Scripts\activate</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8"># カスタムノードのアンインストール</span></span>
+<span class="line"><span style="color:#E1E4E8">pip uninstall comfyui</span><span style="color:#F97583">-</span><span style="color:#E1E4E8">custom</span><span style="color:#F97583">-</span><span style="color:#E1E4E8">nodes</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8"># カスタムノードの再インストール</span></span>
+<span class="line"><span style="color:#E1E4E8">pip install comfyui</span><span style="color:#F97583">-</span><span style="color:#E1E4E8">custom</span><span style="color:#F97583">-</span><span style="color:#E1E4E8">nodes</span></span></code></pre>
+<h2 id="faq-よくある質問">FAQ (よくある質問)</h2>
+<ul>
+<li>
+<p><strong>Q: 他のGPUでも同じエラーが出る？</strong></p>
+<ul>
+<li>A: メモリ管理が問題であれば、他のGPUでも同様に発生します。必ず<code>torch.cuda.empty_cache()</code>の使用を確認してください。</li>
+</ul>
+</li>
+<li>
+<p><strong>Q: エラーが解決しない場合？</strong></p>
+<ul>
+<li>A: 原因が特定できない場合は、スタックトレースやログファイルを共有して詳細な情報を得ましょう。また、ComfyUIの公式フォーラムでの質問も有効です。</li>
+</ul>
+</li>
+</ul>
+<h2 id="まとめ">まとめ</h2>
+<p>CUDA error : invalid argument は直すことができます！手順を踏んで一つずつ確認しながら進めると良いでしょう。もし解決できない場合は、コミュニティやサポートに頼ってみましょう。あきらめずに挑戦すれば必ず解決します！</p>
+<p>これでComfyUIのエラー対処が一歩前進ですね！</p>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2026 ComfyUI Error Database. All rights reserved.
+<br data-astro-cid-sz7xmlte> <a href="/privacy-policy" style="font-size: 0.8em; color: #58a6ff; text-decoration: none;" data-astro-cid-sz7xmlte>Privacy Policy</a> </footer>  </body></html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="ComfyUI Error Database" href="https://comfyui-error-db.pages.dev/rss.xml"><meta name="generator" content="Astro v5.16.9"><!-- Font preloads --><link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://comfyui-error-db.pages.dev/blog/ja/issue-2591/"><!-- Primary Meta Tags --><title>【ComfyUI】Dynamic Lora Weights エラーの完全解決ガイド</title><meta name="title" content="【ComfyUI】Dynamic Lora Weights エラーの完全解決ガイド"><meta name="description" content="ComfyUIでFeauture request: Dynamic Lora Weightsエラーが出た時の原因と修正手順を解説します。"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://comfyui-error-db.pages.dev/blog/ja/issue-2591/"><meta property="og:title" content="【ComfyUI】Dynamic Lora Weights エラーの完全解決ガイド"><meta property="og:description" content="ComfyUIでFeauture request: Dynamic Lora Weightsエラーが出た時の原因と修正手順を解説します。"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://comfyui-error-db.pages.dev/blog/ja/issue-2591/"><meta property="twitter:title" content="【ComfyUI】Dynamic Lora Weights エラーの完全解決ガイド"><meta property="twitter:description" content="ComfyUIでFeauture request: Dynamic Lora Weightsエラーが出た時の原因と修正手順を解説します。"><script type="module">document.addEventListener("DOMContentLoaded",()=>{document.querySelectorAll("pre").forEach(t=>{if(t.querySelector(".copy-btn"))return;const e=document.createElement("button");e.className="copy-btn",e.innerText="Copy",e.addEventListener("click",()=>{const n=t.querySelector("code")?.innerText||t.innerText;navigator.clipboard.writeText(n).then(()=>{e.innerText="Copied!",setTimeout(()=>e.innerText="Copy",2e3)})}),t.style.position="relative",t.appendChild(e)})});</script><style>:root{--accent: 136, 58, 234;--accent-light: 224, 204, 250;--accent-dark: 49, 10, 101;--black: 13, 17, 23;--gray: 230, 237, 243;--gray-light: 240, 246, 252;--gray-dark: 33, 38, 45;--gray-accent: 48, 54, 61;--font-body: "Helvetica Neue", Arial, sans-serif}body{font-family:var(--font-body);margin:0;padding:0;text-align:left;background:rgb(var(--black));color:rgb(var(--gray));font-size:18px;line-height:1.8;display:flex;flex-direction:column;min-height:100vh}main{width:960px;max-width:calc(100% - 2em);margin:0 auto;padding:3em 1em}h1,h2,h3,h4,h5,h6{margin:0 0 .5rem;color:rgb(var(--gray-light));line-height:1.2}h1{font-size:2.5em;background:linear-gradient(to right,#a78bfa,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5em}h2{font-size:1.8em;border-bottom:2px solid rgb(var(--gray-accent));padding-bottom:.3em;margin-top:2em;margin-bottom:1em;color:rgb(var(--gray-light))}h3{color:rgb(var(--gray-light));margin-top:1.5em}ul{padding:0;list-style:none}li{margin-bottom:2rem}a{color:#58a6ff;text-decoration:none;transition:all .2s ease}a:hover{color:#79c0ff;text-decoration:underline}li a{display:block;background:rgb(var(--gray-dark));padding:1.5rem;border-radius:12px;border:1px solid rgb(var(--gray-accent));box-shadow:0 4px 6px #0000004d}li a:hover{transform:translateY(-2px);box-shadow:0 8px 12px #0006;border-color:#58a6ff;text-decoration:none}.title{font-size:1.5em;color:rgb(var(--gray-light));margin-bottom:.5rem;display:block;font-weight:700}.date{color:rgb(var(--gray));font-size:.9em}code{padding:2px 5px;background-color:rgb(var(--gray-accent));color:rgb(var(--gray-light));border-radius:4px;font-family:Consolas,Monaco,Andale Mono,monospace}pre{padding:1.5em;background-color:#0d1117!important;border-radius:8px;border:1px solid #30363d;overflow-x:auto;font-size:.9em;color:#c9d1d9}img{max-width:100%;border-radius:8px}.copy-btn[data-astro-cid-y4licvga]{position:absolute;top:5px;right:5px;background:#238636;color:#fff;border:none;padding:4px 8px;border-radius:4px;cursor:pointer;font-size:12px;opacity:.8}.copy-btn[data-astro-cid-y4licvga]:hover{opacity:1}pre[data-astro-cid-y4licvga]{position:relative}footer[data-astro-cid-sz7xmlte]{padding:2em 1em 6em;background:transparent;color:#8b949e;text-align:center;border-top:1px solid #30363d;margin-top:4rem}header[data-astro-cid-3ef6ksr2]{margin:0;padding:0 1em;background:#0d1117;box-shadow:0 2px 8px #0006;border-bottom:1px solid #30363d}h2[data-astro-cid-3ef6ksr2]{margin:0;font-size:1em}h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2],h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none;color:#fff}nav[data-astro-cid-3ef6ksr2]{display:flex;align-items:center;justify-content:space-between;height:60px}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{padding:1em .5em;color:#c9d1d9;border-bottom:4px solid transparent;text-decoration:none}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none;border-bottom-color:#58a6ff;color:#fff}
+main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.hero-image[data-astro-cid-bvzihdzo]{width:100%}.hero-image[data-astro-cid-bvzihdzo] img[data-astro-cid-bvzihdzo]{display:block;margin:0 auto;border-radius:12px;box-shadow:var(--box-shadow)}.prose[data-astro-cid-bvzihdzo]{width:720px;max-width:calc(100% - 2em);margin:auto;padding:1em;color:rgb(var(--gray))}.title[data-astro-cid-bvzihdzo]{margin-bottom:1em;padding:1em 0;text-align:center;line-height:1}.title[data-astro-cid-bvzihdzo] h1[data-astro-cid-bvzihdzo]{margin:0 0 .5em}.date[data-astro-cid-bvzihdzo]{margin-bottom:.5em;color:rgb(var(--gray))}.last-updated-on[data-astro-cid-bvzihdzo]{font-style:italic}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>ComfyUI Error Database</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>JP</a> <a href="/en/" data-astro-cid-3ef6ksr2>EN</a> <a href="/zh/" data-astro-cid-3ef6ksr2>ZH</a> <a href="https://github.com/withastro/astro-blog-template" data-astro-cid-3ef6ksr2>GitHub</a> </div> </nav> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo>  </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2026-01-14T00:00:00.000Z"> Jan 14, 2026 </time>  </div> <h1 data-astro-cid-bvzihdzo>【ComfyUI】Dynamic Lora Weights エラーの完全解決ガイド</h1> <hr data-astro-cid-bvzihdzo> </div>  <h3 id="はじめに">はじめに</h3>
+<p>あなたはComfyUIを使用していて、「Feauture request: Dynamic Lora Weights」というエラーが出たとお困りではありませんか？この記事では、初心者の方でも簡単に解決できる方法を解説します。このエラーが起こる原因や、どのように対処すれば良いのかを詳しく紹介します。</p>
+<h3 id="前提条件">前提条件</h3>
+<ul>
+<li><strong>OS</strong>: Windows</li>
+<li><strong>環境</strong>: Python 環境（Python 3.7以上）</li>
+</ul>
+<h3 id="原因の解説">原因の解説</h3>
+<p>このエラーは、「Dynamic Lora Weights」という拡張機能がインストールされていないか、または正しくインストールされなかった場合に発生します。この拡張機能はLoRAモデルを使用する際に、各生成ステップでの重みを動的に調整できる非常に強力なツールです。</p>
+<h3 id="解決ステップ-step-by-step">解決ステップ (Step-by-Step)</h3>
+<h4 id="step-1-拡張機能の確認">Step 1: 拡張機能の確認</h4>
+<p>まず、「Dynamic Lora Weights」拡張機能がインストールされていることを確認します。既にインストール済みであれば、次の手順を飛ばして問題解決を目指しましょう。</p>
+<ol>
+<li>ComfyUIの設定画面（または管理ページ）を開きます。</li>
+<li>「Extensions」や「Custom Nodes」のセクションを探し、「Dynamic Lora Weights」があるかどうか確認します。</li>
+</ol>
+<h4 id="step-2-拡張機能のインストール">Step 2: 拡張機能のインストール</h4>
+<p>「Dynamic Lora Weights」が見つからない場合、以下の手順でインストールを行います。Pythonの仮想環境<code>venv</code>を使用して作業を進めましょう。</p>
+<ol>
+<li>Pythonのターミナルを開きます。</li>
+<li>拡張機能のGitHubリポジトリから最新版のzipファイルをダウンロードします（リンク：<a href="https://github.com/cheald/sd-webui-loractl%EF%BC%89%E3%80%82">https://github.com/cheald/sd-webui-loractl）。</a></li>
+<li>ダウンロードしたzipファイルを解凍し、ComfyUIのextensionsフォルダに移動させます。</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">cd</span><span style="color:#9ECBFF"> ~/path/to/comfyui/extensions/</span></span>
+<span class="line"><span style="color:#B392F0">unzip</span><span style="color:#9ECBFF"> /path/to/downloaded/dynamic_lora_weights.zip</span><span style="color:#79B8FF"> -d</span><span style="color:#9ECBFF"> dynamic_lora_weights</span></span></code></pre>
+<ol start="4">
+<li>拡張機能がインストールされたことを確認するために、以下のコマンドを実行します：</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">pip</span><span style="color:#9ECBFF"> install</span><span style="color:#79B8FF"> --upgrade</span><span style="color:#79B8FF"> -r</span><span style="color:#9ECBFF"> ./dynamic_lora_weights/requirements.txt</span></span></code></pre>
+<ol start="5">
+<li>最後にComfyUIを再起動し、「Dynamic Lora Weights」の設定画面を開いてみてください。エラーが消えていれば問題解決です！</li>
+</ol>
+<h3 id="よくある質問-faq">よくある質問 (FAQ)</h3>
+<ul>
+<li><strong>Q</strong>: リポジトリから直接インストールできない場合、どのようにしたら良いですか？
+<ul>
+<li><strong>A</strong>: GitHubリポジトリをクローンする方法もあります。
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> clone</span><span style="color:#9ECBFF"> https://github.com/cheald/sd-webui-loractl.git</span><span style="color:#9ECBFF"> dynamic_lora_weights</span></span></code></pre>
+</li>
+</ul>
+</li>
+<li><strong>Q</strong>: Python環境が問題でエラーが出る場合、どうしたら良いですか？
+<ul>
+<li><strong>A</strong>: ComfyUIのPython環境を新たに作成し直すか、別の仮想環境<code>venv</code>を作り直してみてください。</li>
+</ul>
+</li>
+</ul>
+<h3 id="まとめ">まとめ</h3>
+<p>このエラーは「Dynamic Lora Weights」拡張機能がインストールされていないため起こるものです。手順通りに行うことで簡単に解決できます。もし何かトラブルがあれば、ComfyUIのフォーラムやコミュニティに質問すると良いでしょう！あきらめずに挑戦しましょう！</p>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2026 ComfyUI Error Database. All rights reserved.
+<br data-astro-cid-sz7xmlte> <a href="/privacy-policy" style="font-size: 0.8em; color: #58a6ff; text-decoration: none;" data-astro-cid-sz7xmlte>Privacy Policy</a> </footer>  </body></html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="ComfyUI Error Database" href="https://comfyui-error-db.pages.dev/rss.xml"><meta name="generator" content="Astro v5.16.9"><!-- Font preloads --><link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin><link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://comfyui-error-db.pages.dev/blog/ja/issue-660/"><!-- Primary Meta Tags --><title>【ComfyUI】AITemplate の完全解決ガイド</title><meta name="title" content="【ComfyUI】AITemplate の完全解決ガイド"><meta name="description" content="ComfyUIのエラー 'AITemplate' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://comfyui-error-db.pages.dev/blog/ja/issue-660/"><meta property="og:title" content="【ComfyUI】AITemplate の完全解決ガイド"><meta property="og:description" content="ComfyUIのエラー 'AITemplate' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://comfyui-error-db.pages.dev/blog/ja/issue-660/"><meta property="twitter:title" content="【ComfyUI】AITemplate の完全解決ガイド"><meta property="twitter:description" content="ComfyUIのエラー 'AITemplate' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"><script type="module">document.addEventListener("DOMContentLoaded",()=>{document.querySelectorAll("pre").forEach(t=>{if(t.querySelector(".copy-btn"))return;const e=document.createElement("button");e.className="copy-btn",e.innerText="Copy",e.addEventListener("click",()=>{const n=t.querySelector("code")?.innerText||t.innerText;navigator.clipboard.writeText(n).then(()=>{e.innerText="Copied!",setTimeout(()=>e.innerText="Copy",2e3)})}),t.style.position="relative",t.appendChild(e)})});</script><style>:root{--accent: 136, 58, 234;--accent-light: 224, 204, 250;--accent-dark: 49, 10, 101;--black: 13, 17, 23;--gray: 230, 237, 243;--gray-light: 240, 246, 252;--gray-dark: 33, 38, 45;--gray-accent: 48, 54, 61;--font-body: "Helvetica Neue", Arial, sans-serif}body{font-family:var(--font-body);margin:0;padding:0;text-align:left;background:rgb(var(--black));color:rgb(var(--gray));font-size:18px;line-height:1.8;display:flex;flex-direction:column;min-height:100vh}main{width:960px;max-width:calc(100% - 2em);margin:0 auto;padding:3em 1em}h1,h2,h3,h4,h5,h6{margin:0 0 .5rem;color:rgb(var(--gray-light));line-height:1.2}h1{font-size:2.5em;background:linear-gradient(to right,#a78bfa,#3b82f6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5em}h2{font-size:1.8em;border-bottom:2px solid rgb(var(--gray-accent));padding-bottom:.3em;margin-top:2em;margin-bottom:1em;color:rgb(var(--gray-light))}h3{color:rgb(var(--gray-light));margin-top:1.5em}ul{padding:0;list-style:none}li{margin-bottom:2rem}a{color:#58a6ff;text-decoration:none;transition:all .2s ease}a:hover{color:#79c0ff;text-decoration:underline}li a{display:block;background:rgb(var(--gray-dark));padding:1.5rem;border-radius:12px;border:1px solid rgb(var(--gray-accent));box-shadow:0 4px 6px #0000004d}li a:hover{transform:translateY(-2px);box-shadow:0 8px 12px #0006;border-color:#58a6ff;text-decoration:none}.title{font-size:1.5em;color:rgb(var(--gray-light));margin-bottom:.5rem;display:block;font-weight:700}.date{color:rgb(var(--gray));font-size:.9em}code{padding:2px 5px;background-color:rgb(var(--gray-accent));color:rgb(var(--gray-light));border-radius:4px;font-family:Consolas,Monaco,Andale Mono,monospace}pre{padding:1.5em;background-color:#0d1117!important;border-radius:8px;border:1px solid #30363d;overflow-x:auto;font-size:.9em;color:#c9d1d9}img{max-width:100%;border-radius:8px}.copy-btn[data-astro-cid-y4licvga]{position:absolute;top:5px;right:5px;background:#238636;color:#fff;border:none;padding:4px 8px;border-radius:4px;cursor:pointer;font-size:12px;opacity:.8}.copy-btn[data-astro-cid-y4licvga]:hover{opacity:1}pre[data-astro-cid-y4licvga]{position:relative}footer[data-astro-cid-sz7xmlte]{padding:2em 1em 6em;background:transparent;color:#8b949e;text-align:center;border-top:1px solid #30363d;margin-top:4rem}header[data-astro-cid-3ef6ksr2]{margin:0;padding:0 1em;background:#0d1117;box-shadow:0 2px 8px #0006;border-bottom:1px solid #30363d}h2[data-astro-cid-3ef6ksr2]{margin:0;font-size:1em}h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2],h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none;color:#fff}nav[data-astro-cid-3ef6ksr2]{display:flex;align-items:center;justify-content:space-between;height:60px}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{padding:1em .5em;color:#c9d1d9;border-bottom:4px solid transparent;text-decoration:none}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none;border-bottom-color:#58a6ff;color:#fff}
+main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.hero-image[data-astro-cid-bvzihdzo]{width:100%}.hero-image[data-astro-cid-bvzihdzo] img[data-astro-cid-bvzihdzo]{display:block;margin:0 auto;border-radius:12px;box-shadow:var(--box-shadow)}.prose[data-astro-cid-bvzihdzo]{width:720px;max-width:calc(100% - 2em);margin:auto;padding:1em;color:rgb(var(--gray))}.title[data-astro-cid-bvzihdzo]{margin-bottom:1em;padding:1em 0;text-align:center;line-height:1}.title[data-astro-cid-bvzihdzo] h1[data-astro-cid-bvzihdzo]{margin:0 0 .5em}.date[data-astro-cid-bvzihdzo]{margin-bottom:.5em;color:rgb(var(--gray))}.last-updated-on[data-astro-cid-bvzihdzo]{font-style:italic}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>ComfyUI Error Database</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2>JP</a> <a href="/en/" data-astro-cid-3ef6ksr2>EN</a> <a href="/zh/" data-astro-cid-3ef6ksr2>ZH</a> <a href="https://github.com/withastro/astro-blog-template" data-astro-cid-3ef6ksr2>GitHub</a> </div> </nav> </header>  <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo>  </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2026-01-14T00:00:00.000Z"> Jan 14, 2026 </time>  </div> <h1 data-astro-cid-bvzihdzo>【ComfyUI】AITemplate の完全解決ガイド</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2 id="はじめに">はじめに</h2>
+<p>こんにちは！ComfyUIを使っている方の中には、「AITemplate」というエラーが出た経験がある人も多いかもしれません。この記事では、そんなあなたのために「AITemplate」の問題を完全解決する方法をお伝えします。</p>
+<p>もしもPythonやプログラミング全般について詳しくないクリエイターさんでも大丈夫です。具体的な手順と必要なコマンドを丁寧に解説していきますので、最後まで読み進めてみてくださいね。</p>
+<h2 id="原因の解説">原因の解説</h2>
+<p>ComfyUIを使って画像生成をするとき、「AITemplate」というモジュールが必要になります。この「AITemplate」は、高度な機械学習モデルを効率的に動作させるために開発されたものです。ただし、このモジュールを使うためには特別な準備が求められることが少なくありません。</p>
+<p>具体的には、以下の条件が満たされていないとエラーが出ることがあります：</p>
+<ol>
+<li><strong>AITemplate用のモジュールが正しくコンパイルされているか確認する必要がある</strong>。</li>
+<li><strong>必要なモデルやデータが適切にロードできているかどうか</strong>。</li>
+</ol>
+<p>これらは専門的な話ではありますが、心配ありません。以下で具体的な手順を紹介しますので、一つずつ進めていきましょう。</p>
+<h2 id="解決ステップ-step-by-step">解決ステップ (Step-by-Step)</h2>
+<h3 id="step-1-aitemplate用のモジュールをコンパイルする">Step 1: AITemplate用のモジュールをコンパイルする</h3>
+<p>まず最初に、「AITemplate」が正しく動作するために必要な「unet」や「controlnet」などのモジュールをコンパイルします。具体的な手順は以下の通りです：</p>
+<h4 id="コンソールを開いてください">コンソールを開いてください。</h4>
+<ol>
+<li>
+<p><strong>AITemplateのリポジトリをクローンする</strong>：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>git clone https://github.com/facebookincubator/AITemplate.git</span></span></code></pre>
+</li>
+<li>
+<p><strong>必要なスクリプトを実行する</strong>：</p>
+<ul>
+<li>unet用のモジュールをコンパイルする場合
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">python</span><span style="color:#9ECBFF"> examples/05_stable_diffusion/scripts/compile_alt.py</span></span></code></pre>
+</li>
+<li>controlnet用のモジュールをコンパイルする場合
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">python</span><span style="color:#9ECBFF"> examples/05_stable_diffusion/scripts/compile_controlnet.py</span></span></code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>確認</strong>: コンソールに「Successfully compiled」のようなメッセージが出力されれば、問題なくコンパイルが完了しています。</p>
+</li>
+</ol>
+<h3 id="step-2-comfyuiでモデルをロードする">Step 2: ComfyUIでモデルをロードする</h3>
+<p>次に、ComfyUI上で適切なモデルをロードします。具体的には以下の手順で進めます：</p>
+<ol>
+<li>
+<p><strong>Load Checkpoint</strong> ノードを使用して必要なモデルをロードしてください。</p>
+<ul>
+<li>画面右側のノードリストから「Node」タブを開き、「Load Checkpoint」を探し、それをワークフローにドラッグアンドドロップします。</li>
+</ul>
+</li>
+<li>
+<p><strong>AITemplate</strong> モジュールをロードする</p>
+<ul>
+<li>「Load AITemplate」ノードを使用して先ほどコンパイルしたモジュールをロードしてください。これも同様に「Node」タブからワークフローに追加します。</li>
+</ul>
+</li>
+<li>
+<p><strong>KSampler (AITemplate)</strong> を実行</p>
+<ul>
+<li>最後に、「KSampler (AITemplate)」のノードを使って、モデルとAITemplateモジュールを接続して動作させます。</li>
+</ul>
+</li>
+</ol>
+<h3 id="step-3-エラーが再発する場合は">Step 3: エラーが再発する場合は…</h3>
+<p>もし上記の手順で問題が解決しない場合、以下の点も確認してください：</p>
+<ul>
+<li><strong>必要なライブラリや依存関係を適切にインストールしているか</strong>。特にAITemplateの公式ドキュメンテーションには、必要なパッケージの一覧がありますので参照してください。</li>
+<li><strong>ComfyUIのバージョンが最新かどうか</strong>。古いバージョンでは不具合が出ることがあります。</li>
+</ul>
+<h2 id="まとめ">まとめ</h2>
+<p>エラーは怖いものではありません。「ステップバイステップ」で進めていけば、必ず解決できます。Pythonやプログラミングについては詳しくなくても大丈夫です。具体的な手順とコマンドを丁寧に説明しているので、一つずつ進めることをおすすめします。</p>
+<p>今回の問題が解決したら、ぜひ次は自分の作品作りに取り組んでみてください！自分だけのオリジナル画像を作成する喜びを感じてくださいね。</p>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2026 ComfyUI Error Database. All rights reserved.
+<br data-astro-cid-sz7xmlte> <a href="/privacy-policy" style="font-size: 0.8em; color: #58a6ff; text-decoration: none;" data-astro-cid-sz7xmlte>Privacy Policy</a> </footer>  </body></html>
