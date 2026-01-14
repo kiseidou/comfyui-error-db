@@ -3,6 +3,7 @@
 title: "【ComfyUI】[Flux] Color noise instead of picture の完全解決ガイド"
 description: "ComfyUIのエラー '[Flux] Color noise instead of picture' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-13"
+---
 
 ### 前提条件
 この解説は、Windows環境およびPython仮想環境（venv）を前提としています。また、ComfyUIの最新バージョンがインストールされていることを確認してください。
