@@ -1,0 +1,20 @@
+
+> comfyui-error-db@0.0.1 build
+> astro build
+
+[2m20:33:04[22m [34m[content][39m Syncing content
+[31m[InvalidContentEntryDataError][39m [1mblog → en/issue-2666[22m data does not match collection schema.
+
+  [1mtitle**: **title[22m: Required
+  [1mdescription**: **description[22m: Required
+  [1mpubDate**: **pubDate[22m: Invalid date
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mLocation:[22m
+    [4mD:\ANTIGRAVITY\comfyui-error-db\src\content\blog\en\issue-2666.md:0:0[24m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/ANTIGRAVITY/comfyui-error-db/node_modules/astro/dist/content/utils.js:168:26)
+    at async syncData (D:/ANTIGRAVITY/comfyui-error-db/node_modules/astro/dist/content/loaders/glob.js:97:28)[22m

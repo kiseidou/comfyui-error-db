@@ -53,3 +53,53 @@ const { title, description, image } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 {image && <meta property="twitter:image" content={new URL(image, Astro.url)} />}
+
+<style>
+  /* One-click Copy Button Styles */
+  .copy-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: #238636;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    opacity: 0.8;
+  }
+  .copy-btn:hover {
+    opacity: 1;
+  }
+  pre {
+    position: relative;
+  }
+</style>
+
+<script>
+  // Add Copy Button to all <pre> blocks
+  document.addEventListener('DOMContentLoaded', () => {
+    // Only target pre blocks that contain code
+    document.querySelectorAll('pre').forEach((pre) => {
+      // Check if button already exists (client side nav might double inject)
+      if (pre.querySelector('.copy-btn')) return;
+
+      const btn = document.createElement('button');
+      btn.className = 'copy-btn';
+      btn.innerText = 'Copy';
+      btn.addEventListener('click', () => {
+        const code = pre.querySelector('code')?.innerText || pre.innerText;
+        // Strip copy button text itself if it gets caught, though innerText usually fine
+        navigator.clipboard.writeText(code).then(() => {
+          btn.innerText = 'Copied!';
+          setTimeout(() => btn.innerText = 'Copy', 2000);
+        });
+      });
+      
+      // Astro/Markdown usually wraps code in pre, ensure position relative
+      pre.style.position = 'relative';
+      pre.appendChild(btn);
+    });
+  });
+</script>

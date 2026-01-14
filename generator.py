@@ -7,17 +7,17 @@ import time
 from datetime import datetime
 import subprocess
 import re
-import yaml # Check validity
+import yaml 
 
 # --- Configuration ---
 GITHUB_REPO = "comfyanonymous/ComfyUI"
 OLLAMA_API_URL = "http://localhost:11434/api/generate"
 MODEL_NAME = "qwen2.5:14b" 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-OUTPUT_DIR = os.path.join(BASE_DIR, "src", "content", "blog")
+CONTENT_DIR = os.path.join(BASE_DIR, "src", "content", "blog")
 
 def get_issues(page=1):
-    """GitHubからClosedなIssueを取得する (人気順) - Infinite Page Loop support"""
+    """Fetch closed issues from GitHub"""
     url = f"https://api.github.com/repos/{GITHUB_REPO}/issues?state=closed&sort=comments&direction=desc&per_page=100&page={page}"
     print(f"Fetching hot topics from {url}...")
     try:
@@ -29,169 +29,250 @@ def get_issues(page=1):
         print(f"Error fetching issues: {e}")
         return []
 
-def generate_article(issue):
-    """Ollamaを使って日本語記事を生成する"""
+def generate_content(issue, lang="ja"):
+    """
+    Generate content in specific language.
+    lang: "ja", "en", "zh"
+    """
     title = issue.get('title', 'No Title')
     body = issue.get('body', '')
-    if not body:
-        return None
-    
-    prompt = f"""
-    あなたはComfyUIのエキスパートであり、初心者にも優しく教える「技術系メンター」です。
-    以下のGitHub Issue（不具合報告）を元に、
-    「誰でも確実にエラーを解決できる完全ガイド（チュートリアル記事）」を作成してください。
+    if not body: return None
 
-    【ターゲット読者】
-    - ComfyUIを使っているが、Pythonやプログラミングには詳しくないクリエイター
-    - エラーが出て困り果てており、手取り足取り教えてほしい人
+    # --- Prompt Switching ---
+    if lang == "ja":
+        prompt = f"""
+        あなたはComfyUIのエキスパートです。
+        以下のGitHub Issue（不具合報告）を元に、「エラー解決の完全ガイド」を日本語で作成してください。
+        
+        【構成】
+        1. タイトル: "【完全解決】ComfyUIで「{title}」エラーの対処法"
+        2. フロントマター(厳守):
+           ---
+           title: "【ComfyUI】{title} の完全解決ガイド"
+           description: "Error fix guide for {title}"
+           pubDate: "{datetime.now().strftime('%Y-%m-%d')}"
+           ---
+        3. 本文: 初心者向けに、原因と解決コマンド(pip install等)を解説。
+        
+        【Issue】
+        {body[:1500]}
+        """
+    elif lang == "zh":
+         prompt = f"""
+        你是一位 ComfyUI 专家。
+        根据以下的 GitHub Issue，创建一个“错误解决完全指南（简体中文）”。
+        
+        【结构】
+        1. 标题: "【完美解决】ComfyUI 报错 “{title}” 的修复方法"
+        2. Frontmatter (必须遵守):
+           ---
+           title: "【ComfyUI】{title} 完美解决指南"
+           description: "ComfyUI Error fix for {title}"
+           pubDate: "{datetime.now().strftime('%Y-%m-%d')}"
+           ---
+        3. 正文: 针对初学者，解释原因并提供具体的解决命令（如 pip install 等）。
+        
+        【Issue】
+        {body[:1500]}
+        """
+    else: # English
+        prompt = f"""
+        You are a ComfyUI Expert.
+        Based on the GitHub Issue below, create a "Complete Error Fix Guide".
 
-    【記事の構成ルール】
-    1. **キャッチーなタイトル**:
-       - "【完全解決】ComfyUIで「{title}」エラーが出た時の対処法" 
-    2. **フロントマター**: 以下の形式を厳守。
-       ---
-       title: "【ComfyUI】{title} の完全解決ガイド"
-       description: "ComfyUIのエラー '{title}' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
-       pubDate: "{datetime.now().strftime('%Y-%m-%d')}"
-       ---
-       ※注意: キー名にアスタリスク(**)を使わないこと。正しいYAML形式を守ること。
-    3. **本文構成**:
-       - **はじめに**: 読者に寄り添う導入。
-       - **原因の解説**: 技術用語を噛み砕いて説明。
-       - **解決ステップ (Step-by-Step)**: 具体的なコマンドや操作。
-       - **まとめ**: 励ましの言葉。
+        [Structure]
+        1. Title: "How to fix '{title}' in ComfyUI"
+        2. Frontmatter:
+           ---
+           title: "How to fix '{title}' in ComfyUI"
+           description: "Step-by-step fix for {title}"
+           pubDate: "{datetime.now().strftime('%Y-%m-%d')}"
+           ---
+        3. Body: Explain cause and solution commands (pip install etc) for beginners.
 
-    【元データ (Issue)】
-    {body[:2500]} 
-    """
-    
+        [Issue]
+        {body[:1500]} 
+        """
+
     data = {
         "model": MODEL_NAME,
         "prompt": prompt,
         "stream": False
     }
     
-    print(f"Asking AI to write a tutorial about: {title}...")
+    print(f"Generating [{lang.upper()}] article for: {title}...")
     try:
         req = urllib.request.Request(OLLAMA_API_URL, data=json.dumps(data).encode(), headers={'Content-Type': 'application/json'})
         with urllib.request.urlopen(req) as response:
             result = json.loads(response.read().decode())
             raw_md = result['response']
             
-            # --- Sanitization & Validation ---
+            # --- Sanitization ---
+            if "###" in raw_md and "Frontmatter" in raw_md:
+                raw_md = raw_md.replace("### Frontmatter", "")
             
-            # 1. Clean up "### Frontmatter" hallucinations
-            if "### フロントマター:" in raw_md:
-                raw_md = raw_md.replace("### フロントマター:", "")
-            
-            # 2. Extract YAML block
             match = re.search(r'^---\s*\n(.*?)\n---\s*\n', raw_md, re.DOTALL | re.MULTILINE)
             
             if match:
-                # Validate YAML
                 yaml_content = match.group(1)
-                # Remove bolding if present
-                yaml_content_clean = yaml_content.replace('**title:**', 'title:').replace('**description:**', 'description:').replace('**pubDate:**', 'pubDate:')
-                
+                yaml_check = yaml_content.replace('**title:**', 'title:').replace('**description:**', 'description:').replace('**pubDate:**', 'pubDate:')
                 try:
-                    # Test parse
-                    yaml.safe_load(yaml_content_clean)
-                    # If valid, replace the original block with clean block
-                    raw_md = raw_md.replace(yaml_content, yaml_content_clean)
+                    yaml.safe_load(yaml_check)
+                    raw_md = raw_md.replace(yaml_content, yaml_check)
                 except yaml.YAMLError:
-                    print(f"⚠️ Invalid YAML generated for {title}. Regenerating default.")
-                    match = None # Force fallback
+                    match = None 
 
-            # 3. Fallback if no valid frontmatter
             if not match:
-                # Remove any broken top content
-                if "---" in raw_md:
-                     raw_md = raw_md.split("---")[-1]
-
-                raw_md = f"""---
-title: "【ComfyUI】{title.replace('"', '\\"').replace(':', ' -')} の完全解決ガイド"
-description: "ComfyUI Error: {title.replace('"', '\\"').replace(':', ' -')}"
-pubDate: "{datetime.now().strftime('%Y-%m-%d')}"
----
-{raw_md.strip()}"""
+                if "---" in raw_md: raw_md = raw_md.split("---")[-1]
+                
+                # Default Frontmatter Fallback
+                t_safe = title.replace('"', '\\"').replace(':', ' -')
+                if lang == "ja":
+                    raw_md = f'---\ntitle: "【ComfyUI】{t_safe} 解決ガイド"\ndescription: "Fix: {t_safe}"\npubDate: "{datetime.now().strftime("%Y-%m-%d")}"\n---\n{raw_md.strip()}'
+                elif lang == "zh":
+                    raw_md = f'---\ntitle: "【ComfyUI】{t_safe} 修复指南"\ndescription: "Fix: {t_safe}"\npubDate: "{datetime.now().strftime("%Y-%m-%d")}"\n---\n{raw_md.strip()}'
+                else:
+                    raw_md = f'---\ntitle: "Fix {t_safe} in ComfyUI"\ndescription: "Fix: {t_safe}"\npubDate: "{datetime.now().strftime("%Y-%m-%d")}"\n---\n{raw_md.strip()}'
             
             return raw_md
 
     except Exception as e:
-        print(f"Error generating article: {e}")
+        print(f"Error generating ({lang}): {e}")
         return None
 
-def save_article(article_data, issue_number):
-    """記事をMarkdownファイルとして保存する"""
-    if not article_data:
-        return
+def save_article(article_data, issue_number, lang="ja"):
+    if not article_data: return
+    target_dir = os.path.join(CONTENT_DIR, lang)
+    if not os.path.exists(target_dir):
+        os.makedirs(target_dir, exist_ok=True)
 
     filename = f"issue-{issue_number}.md"
-    filepath = os.path.join(OUTPUT_DIR, filename)
+    filepath = os.path.join(target_dir, filename)
 
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(article_data)
-    print(f"Saved: {filepath}")
+    print(f"Saved [{lang}]: {filepath}")
 
 def git_push_batch(count):
-    """記事をGitHubにPushしてCloudflare Pagesの更新をトリガーする"""
-    print(f"\n🚀 Batch update: Pushing {count}th article to production...")
+    print(f"\n🚀 Batch update: Pushing {count}th items...")
     try:
         subprocess.run(["git", "add", "."], check=True)
-        subprocess.run(["git", "commit", "--allow-empty", "-m", f"Auto-deploy: New Tutorial Articles (Batch {count//10})"], check=True)
+        subprocess.run(["git", "commit", "--allow-empty", "-m", f"Auto-deploy: New Global Content (Batch {count//20})"], check=True)
         subprocess.run(["git", "push"], check=True)
-        print("✅ Shipment complete! Site is updating...\n")
+        print("✅ Shipment complete!\n")
     except subprocess.CalledProcessError as e:
         print(f"⚠️ Git push failed: {e}")
 
-def main():
-    print("=== ComfyUI Error Database Factory v3.1 (Infinite + Robust) ===")
+import shutil
+
+# ... existing imports ...
+
+def self_diagnose():
+    print("🏥 Running Self-Diagnosis...")
+    langs = ["ja", "en", "zh"]
     
-    if not os.path.exists(OUTPUT_DIR):
-        os.makedirs(OUTPUT_DIR, exist_ok=True)
+    if not os.path.exists(CONTENT_DIR):
+        os.makedirs(CONTENT_DIR, exist_ok=True)
         
+    for lang in langs:
+        path = os.path.join(CONTENT_DIR, lang)
+        if os.path.exists(path):
+            if os.path.isfile(path):
+                print(f"⚠️ CRITICAL: '{lang}' is a file! Renaming and creating directory.")
+                backup_name = path + f"_backup_{int(time.time())}.md"
+                os.rename(path, backup_name)
+                os.makedirs(path, exist_ok=True)
+                # Move backup into the folder
+                try: shutil.move(backup_name, os.path.join(path, f"restored_{int(time.time())}.md"))
+                except: pass
+        else:
+            os.makedirs(path, exist_ok=True)
+
+    # --- NEW: Corrupt File Sweeper ---
+    print("🧹 Scanning for corrupt articles...")
+    valid_count = 0
+    deleted_count = 0
+    for root, dirs, files in os.walk(CONTENT_DIR):
+        for f in files:
+            if f.endswith(".md"):
+                path = os.path.join(root, f)
+                try:
+                    with open(path, 'r', encoding='utf-8') as file:
+                        content = file.read()
+                    
+                    # Check for Valid Frontmatter
+                    match = re.search(r'^---\s*\n(.*?)\n---\s*\n', content, re.DOTALL | re.MULTILINE)
+                    is_valid = False
+                    
+                    if match:
+                        yaml_text = match.group(1).strip()
+                        if yaml_text:
+                            if "title:" in yaml_text and "pubDate:" in yaml_text:
+                                is_valid = True
+                    
+                    if not is_valid:
+                        print(f"💣 Deleting corrupt file (Bad Frontmatter): {f}")
+                        try:
+                            os.remove(path)
+                            deleted_count += 1
+                        except: pass
+                    else:
+                        valid_count += 1
+                        
+                except Exception as e:
+                    print(f"⚠️ Error checking {f}: {e}")
+                    
+    print(f"✅ Diagnosis Complete. Valid: {valid_count}, Deleted: {deleted_count}")
+
+def main():
+    print("=== ComfyUI Error Database Factory v3.4 (With Safety Check) ===")
+    self_diagnose()
+    
     page = 1
-    total_articles = 0
+
+    total_items = 0
     
     while True:
         print(f"\n--- Starting Page {page} ---")
         issues = get_issues(page)
         
         if not issues:
-            print(f"No more issues found on page {page}. Resetting to Page 1 in 1 hour.")
+            print(f"No more issues. Sleeping 1 hour.")
             time.sleep(3600)
             page = 1
             continue
 
-        print(f"Found {len(issues)} popular issues on page {page}. Production running...")
+        print(f"Found {len(issues)} popular issues. Production running...")
         
         success_count_batch = 0
         for issue in issues:
-            filename = f"issue-{issue['number']}.md"
-            filepath = os.path.join(OUTPUT_DIR, filename)
-            
-            if os.path.exists(filepath):
-                continue
-            
-            # Generate
-            article = generate_article(issue)
-            
-            if article:
-                # Final Paranoid Check: Does it start with ---?
-                if not article.strip().startswith("---"):
-                    print(f"❌ Critical: Generated article for #{issue['number']} missing frontmatter. Skipping.")
-                    continue
-                    
-                save_article(article, issue['number'])
+            # 1. Japanese
+            if not os.path.exists(os.path.join(CONTENT_DIR, "ja", f"issue-{issue['number']}.md")):
+                art = generate_content(issue, "ja")
+                save_article(art, issue['number'], "ja")
                 success_count_batch += 1
-                total_articles += 1
+                total_items += 1
+            
+            # 2. English
+            if not os.path.exists(os.path.join(CONTENT_DIR, "en", f"issue-{issue['number']}.md")):
+                art = generate_content(issue, "en")
+                save_article(art, issue['number'], "en")
+                success_count_batch += 1
+                total_items += 1
                 
-                if success_count_batch > 0 and success_count_batch % 5 == 0:
-                    git_push_batch(total_articles)
+            # 3. Chinese
+            if not os.path.exists(os.path.join(CONTENT_DIR, "zh", f"issue-{issue['number']}.md")):
+                art = generate_content(issue, "zh")
+                save_article(art, issue['number'], "zh")
+                success_count_batch += 1
+                total_items += 1
+
+            if success_count_batch > 0 and success_count_batch % 20 == 0:
+                git_push_batch(total_items)
 
             time.sleep(1) 
             
-        print(f"=== Page {page} Complete. New Articles: {success_count_batch} ===")
+        print(f"=== Page {page} Complete. ===")
         page += 1
         print("Moving to next page in 10 seconds...")
         time.sleep(10)

@@ -1,0 +1,9 @@
+name = "comfyui-error-db"
+compatibility_date = "2024-01-14"
+
+[pages_build_output_dir]
+product = "pages"
+directory = "dist"
+
+[build]
+command = "npm run build"

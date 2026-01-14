@@ -16,10 +16,16 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 18
+          cache: 'npm'
           
       - name: Install Dependencies
         run: npm install
         
+      - name: Clean Output
+        run: rm -rf dist .astro
+
       - name: Build Site
         run: npm run build
+        env:
+          CI: true
