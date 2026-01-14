@@ -1,8 +1,7 @@
 ---
-
-description: "ComfyUIのエラー 'When I enable the New Menu & Workflow, the entire canvas becomes unresponsive.' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
+title: "【ComfyUI】New Menu Canvas Unresponsive エラーの完全解決ガイド"
+description: "ComfyUIのエラー 'When I enable the New Menu & Workflow, the entire canvas becomes unresponsive.' の原因と、初心者でもできる修正手順を解説します。"
 pubDate: "2026-01-14"
-
 ---
 
 ### はじめに
