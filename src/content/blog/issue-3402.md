@@ -1,7 +1,7 @@
 ---
 
 title: "【ComfyUI】Set output default to subfolder of current date \"%Y-%m-%d\" to help better organize output. の完全解決ガイド"
-description: "ComfyUIのエラー 'Set output default to subfolder of current date "%Y-%m-%d" to help better organize output.' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
+description: 'ComfyUIのエラー "Set output default to subfolder of current date "%Y-%m-%d" to help better organize output." の原因と、初心者でもできる修正手順をステップバイステップで解説します。'
 pubDate: "2026-01-13"
 
 ---
