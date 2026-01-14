@@ -1,63 +1,84 @@
 ---
-title: "【ComfyUI】SingleStreamBlock.forward() got an unexpected keyword argument 'modulation_dims_img'"
-description: "ComfyUI Error: SingleStreamBlock.forward() got an unexpected keyword argument 'modulation_dims_img'"
+title: "【ComfyUI】SingleStreamBlock.forward() got an unexpected keyword argument 'modulation_dims_img' の完全解決ガイド"
+description: "ComfyUIのエラー 'SingleStreamBlock.forward() got an unexpected keyword argument 'modulation_dims_img'' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-14"
 ---
-### 【ComfyUI】SingleStreamBlock.forward() got an unexpected keyword argument 'modulation_dims_img' の完全解決ガイド
 
-description: ComfyUIのエラー 'SingleStreamBlock.forward() got an unexpected keyword argument 'modulation_dims_img'' の原因と、初心者でもできる修正手順をステップバイステップで解説します。
-pubDate: 2026-01-14
+## はじめに
 
+ComfyUIを使ってクリエイティブなプロジェクトをおこなっている皆さん、こんにちは！
 
-こんにちは！ComfyUIを使っている方の中には、「SingleStreamBlock.forward() got an unexpected keyword argument 'modulation_dims_img'」というエラーに出くわした経験がある方もいるでしょう。この記事では、その原因と解決方法を詳しく説明します。
+お困りのエラーは「SingleStreamBlock.forward() got an unexpected keyword argument 'modulation_dims_img'」ですね。この記事では、このエラーが何を意味するのか、そしてそれをどのように修正するかを初心者向けに詳しく説明します。
 
-### はじめに
+## 原因の解説
 
-「SingleStreamBlock.forward() got an unexpected keyword argument 'modulation_dims_img'」と表示されたら、ComfyUIの最新版を使用しているときに発生する可能性が高いエラーです。特にSamplerCustomAdvancedという機能を使ってビデオ生成をしている場合に多いようです。
+### 技術的な背景
 
-### 前提条件
+ComfyUIはPythonで書かれているため、私たちが利用しているソフトウェア内部では多くのPythonコードが動いています。このエラー「SingleStreamBlock.forward() got an unexpected keyword argument 'modulation_dims_img'」は、特定の関数（ここでは`forward()`）に渡された引数(`modulation_dims_img`)が期待されていないことを示しています。
 
-この解説は、Windows環境を想定しています。また、Pythonがインストールされていることを前提とします。venv（仮想環境）を使用している場合は、適切な仮想環境がアクティブであることを確認してください。
+### 何が起こっているのか？
 
-### エラーの原因
+問題の原因はComfyUIの新しいバージョンで何か変更が行われたことによって引き起こされています。おそらく、あなたが使っていた古いバージョンと新しいバージョンでは、`SingleStreamBlock.forward()`関数に渡す引数(`modulation_dims_img`)が異なるか、もしくはその引数自体が削除されている可能性があります。
 
-このエラーは、ComfyUIのコードベースに変更があったときに発生します。「modulation_dims_img」がSingleStreamBlockクラスで受け入れる引数として定義されていないために起こります。通常、これは新しいバージョンでの不整合や機能追加によって引き起こされることが多いです。
+## 解決ステップ (Step-by-Step)
 
-### 解決ステップ (Step-by-Step)
+### ステップ1: ソースコードの確認
 
-#### Step 1: ComfyUIの最新版を確認する
+まず、ComfyUIの最新バージョンのソースコードを確認します。特に`SingleStreamBlock.forward()`関数を見つけて、どの引数が期待されているかを調べます。
 
-エラーが発生したときにはまず、使用しているComfyUIのバージョンと現在公開されている最新版を比較することが重要です。新しいバージョンでは問題が修正されている可能性があります。
+#### コマンド
+```bash
+# リポジトリのクローン
+git clone https://github.com/your-comfyui-repo.git
 
-```
-# バージョン情報を表示します
-git tag -l
-```
-
-#### Step 2: 更新前の状態に戻す
-
-もし最新版で問題が解決していない場合、エラーが発生する直前の状態（つまり、更新前）にロールバックすることを検討しましょう。
-
-```
-# ブランチのリストを表示します
-git branch
-
-# 以前のコミットに戻ります (具体的なコミットハッシュが必要です)
-git checkout <commit_hash>
+# 対象のファイルを開く
+code SingleStreamBlock.py  # もしくは適切なエディタで開く
 ```
 
-その後、再度エラー発生前の状態でComfyUIを実行してみましょう。この方法であれば、最新版に含まれる不具合や変更点を避けることができます。
+### ステップ2: 引数の変更または削除を確認
 
-### よくある質問 (FAQ)
+新しいバージョンでは、`modulation_dims_img`という引数が期待されていないか、もしくは削除されているはずです。その確認を行います。
 
-**Q: ComfyUIのバージョンを管理するにはどうすればよいですか？**
+#### 操作
+1. `SingleStreamBlock.py`を開き、`forward()`関数を探します。
+2. その関数内で、`modulation_dims_img`の参照がないかどうかを確認します。
 
-- A: Gitを使用することでバージョンの追跡が容易になります。特に、「tag」と「branch」を上手に使うことで、特定の状態の復元や更新履歴の確認が可能になります。
+### ステップ3: ソースコードの修正
 
-**Q: Pythonの仮想環境（venv）を使うとどんな利点がありますか？**
+もし`modulation_dims_img`が削除されている場合、あなたのワークフローでその引数を使用している部分を修正する必要があります。あるいは、新しいバージョンでの期待される引数を理解し、それに合わせて調整します。
 
-- A: 仮想環境を使用することで、プロジェクト毎に異なるバージョンのライブラリをインストールし、依存関係を管理できます。これにより、複数のプロジェクト間での相互干渉を防ぐことができます。
+#### コード例
+```python
+# 削除または無視された場合の対応
+def forward(self, **kwargs):
+    if 'modulation_dims_img' in kwargs:
+        print("Warning: modulation_dims_img is not used anymore")
+    # 他の引数の処理
 
-### まとめ
+# 新しいバージョンでの期待される引数に基づいて変更
+def forward(self, new_arg1=None, new_arg2=None):
+    pass
+```
 
-ComfyUIでエラーに出くわしても、諦めずに最新情報や既知の問題の修正版を探してみましょう。技術的な詳細に惑わされず、基本的な手順から解決を目指すことが大切です。この記事が皆さんの問題解決の一助になれば幸いです！
+### ステップ4: パッケージの再インストールとテスト実行
+
+修正が完了したら、ComfyUIを再インストールし、ワークフローをテストしてエラーが解消したか確認します。
+
+#### コマンド
+```bash
+# 既存のインストールを削除
+pip uninstall comfyui
+
+# 最新バージョンから再インストール
+pip install git+https://github.com/your-comfyui-repo.git@latest_version_tag_or_branch
+```
+
+### ステップ5: エラーの確認と対策の完了
+
+ワークフローを実行し、再度エラーが発生しないか確認します。もし問題が解消していれば、作業は完了です。
+
+## まとめ
+
+新しいバージョンでの変更に適応するために、既存のコードや設定を見直すことは必要なプロセスです。エラーに戸惑うかもしれませんが、一つずつ解決策を見つけ出すことで、新たなバージョンでも快適にComfyUIを使用できます。
+
+次回から何か問題が起きた時は、まずは原因を理解し、具体的な手順で対処しましょう！あなたも自信を持ってコードの修正を行えるようになるはずです。頑張ってください！
