@@ -95,13 +95,21 @@ def generate_article(issue):
             raw_md = result['response']
             
             # --- Sanitization (安全装置) ---
+            # 1. Regex to find the real frontmatter block (containing title:)
+            import re
+            match = re.search(r'---\s*\n(.*?)title:\s*"(.*?)".*?---', raw_md, re.DOTALL)
+            
+            # If standard structure isn't found, try to clean up known hallucinations
+            if "### フロントマター:" in raw_md:
+                raw_md = raw_md.replace("### フロントマター:", "").replace("---\n\n---", "---")
+                
             # Remove any text before the first "---"
             if "---" in raw_md:
                 first_fence = raw_md.find("---")
                 if first_fence > 0:
                     raw_md = raw_md[first_fence:]
-            
-            # Common AI hallucination fix: Remove markdown bolding from keys
+
+            # Remove markdown bolding from keys
             raw_md = raw_md.replace('**title:**', 'title:').replace('**description:**', 'description:').replace('**pubDate:**', 'pubDate:')
             
             # Ensure proper frontmatter if missing
