@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】Connection Errorの完全解決ガイド"
+title: "【UnityML】Connection Errorの完全解決ガイド"
 description: "ComfyUIでHugging Face Hub接続エラー（Connection Error）が出た時の原因と修正手順を解説します。"
 pubDate: "2026-01-14"
 ---

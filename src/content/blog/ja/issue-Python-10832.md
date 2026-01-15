@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】Add MatchType, DynamicCombo, and Autogrow support to V3 Schema の完全解決ガイド"
+title: "【Python】Add MatchType, DynamicCombo, and Autogrow support to V3 Schema の完全解決ガイド"
 description: "ComfyUIのエラー 'Add MatchType, DynamicCombo, and Autogrow support to V3 Schema' の原因と、初心者でもできる修正手順をステップバイステプで解説します。"
 pubDate: "2026-01-13"
 ---

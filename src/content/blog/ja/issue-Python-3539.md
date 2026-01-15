@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】Cannot handle this data type: (1, 1, 3), <f4 の完全解決ガイド"
+title: "【Python】Cannot handle this data type: (1, 1, 3), <f4 の完全解決ガイド"
 description: "ComfyUIのエラー 'Cannot handle this data type: (1, 1, 3), <f4' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-14"
 ---

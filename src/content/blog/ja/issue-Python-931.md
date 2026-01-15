@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】Node Expansion, While Loops, Components, and Lazy Evaluation の完全解決ガイド"
+title: "【Python】Node Expansion, While Loops, Components, and Lazy Evaluation の完全解決ガイド"
 description: "ComfyUIのエラー 'Node Expansion, While Loops, Components, and Lazy Evaluation' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-13"
 ---

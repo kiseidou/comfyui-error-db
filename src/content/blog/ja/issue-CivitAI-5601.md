@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】Update broke PuLID の完全解決ガイド"
+title: "【CivitAI】Update broke PuLID の完全解決ガイド"
 description: "ComfyUIのエラー 'Update broke PuLID' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-13"
 ---

@@ -18,16 +18,42 @@ const posts = (await getCollection('blog'))
 	<body>
 		<Header />
 		<main>
-			<h1>🔍 ComfyUI 错误数据库</h1>
-			<p>AI 24小时自动收集并翻译 ComfyUI 错误解决方案。</p>
+			<h1>🔍 Game & AI Error Database</h1>
+			<p>AI 24小时自动收集并翻译 ComfyUI, Unity, Python, 及 AI 开发错误解决方案。</p>
 			
+			<!-- Category Tabs -->
+			<div class="category-tabs" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
+				{['All', 'ComfyUI', 'UnityML', 'Python', 'CivitAI', 'HuggingFace', 'ReactNative', 'Other'].map((cat) => (
+					<button 
+						class="filter-btn" 
+						data-category={cat}
+						style="padding: 6px 12px; border-radius: 20px; border: 1px solid #30363d; background: #0d1117; color: #8b949e; cursor: pointer; transition: all 0.2s;"
+					>
+						{cat}
+					</button>
+				))}
+			</div>
+
 			<div style="margin-bottom: 2rem;">
 				<input type="text" id="search" placeholder="搜索错误信息..." style="width: 100%; padding: 10px; font-size: 16px; border-radius: 8px; border: 1px solid #30363d; background: #0d1117; color: white;">
 			</div>
 
 			<div id="article-list" style="margin-top: 2rem;">
-				{posts.map((post) => (
-					<div class="article-card" data-title={post.data.title.toLowerCase()} style="border: 1px solid #30363d; padding: 1rem; margin-bottom: 1rem; border-radius: 8px; background: #161b22;">
+				{posts.map((post) => {
+					// Extract category from title 【Category】
+					const match = post.data.title.match(/【(.*?)】/);
+					let category = 'Other';
+					if (match && match[1]) {
+						category = match[1];
+					}
+					
+					return (
+					<div 
+						class="article-card" 
+						data-title={post.data.title.toLowerCase()} 
+						data-category={category}
+						style="border: 1px solid #30363d; padding: 1rem; margin-bottom: 1rem; border-radius: 8px; background: #161b22;"
+					>
 						<a href={`/blog/${post.id}/`} style="text-decoration: none; color: inherit; display: block;">
 							<h3 style="margin: 0; color: #58a6ff;">{post.data.title}</h3>
 							<p style="margin: 0.5rem 0 0; font-size: 0.9rem; color: #8b949e;">
@@ -35,29 +61,80 @@ const posts = (await getCollection('blog'))
 							</p>
 						</a>
 					</div>
-				))}
+				)})}
 			</div>
 		</main>
 		<Footer />
 		<script>
 			const searchInput = document.getElementById('search');
+			const filterBtns = document.querySelectorAll('.filter-btn');
 			const articles = document.querySelectorAll('.article-card');
 
+			let currentCategory = 'All';
+			let currentSearch = '';
+
+			function filterArticles() {
+				articles.forEach(article => {
+					const title = article.getAttribute('data-title');
+					const category = article.getAttribute('data-category');
+					
+					const matchesCategory = currentCategory === 'All' || category === currentCategory;
+					const matchesSearch = !currentSearch || (title && title.includes(currentSearch));
+
+					if (matchesCategory && matchesSearch) {
+						// @ts-ignore
+						article.style.display = 'block';
+					} else {
+						// @ts-ignore
+						article.style.display = 'none';
+					}
+				});
+			}
+
+			// Search Event
 			if (searchInput) {
 				searchInput.addEventListener('input', (e) => {
 					// @ts-ignore
-					const term = e.target.value.toLowerCase();
-					articles.forEach(article => {
-						const title = article.getAttribute('data-title');
-						if (title && title.includes(term)) {
-							// @ts-ignore
-							article.style.display = 'block';
-						} else {
-							// @ts-ignore
-							article.style.display = 'none';
-						}
-					});
+					currentSearch = e.target.value.toLowerCase();
+					filterArticles();
 				});
+			}
+
+			// Tab Event
+			filterBtns.forEach(btn => {
+				btn.addEventListener('click', () => {
+					filterBtns.forEach(b => {
+						// @ts-ignore
+						b.style.background = '#0d1117';
+						// @ts-ignore
+						b.style.color = '#8b949e';
+						// @ts-ignore
+						b.style.borderColor = '#30363d';
+					});
+					// @ts-ignore
+					btn.style.background = '#1f6feb';
+					// @ts-ignore
+					btn.style.color = 'white';
+					// @ts-ignore
+					btn.style.borderColor = '#1f6feb';
+
+					const cat = btn.getAttribute('data-category');
+					if (cat) {
+						currentCategory = cat;
+						filterArticles();
+					}
+				});
+			});
+
+			// Init with first tab active
+			if(filterBtns.length > 0) {
+				const first = filterBtns[0];
+				// @ts-ignore
+				first.style.background = '#1f6feb';
+				// @ts-ignore
+				first.style.color = 'white';
+				// @ts-ignore
+				first.style.borderColor = '#1f6feb';
 			}
 		</script>
 	</body>

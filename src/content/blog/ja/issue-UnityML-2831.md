@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】Support for Stable Cascade LoRAs and embeddings の完全解決ガイド"
+title: "【UnityML】Support for Stable Cascade LoRAs and embeddings の完全解決ガイド"
 description: "ComfyUIのエラー 'Support for Stable Cascade LoRAs and embeddings' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-14"
 ---

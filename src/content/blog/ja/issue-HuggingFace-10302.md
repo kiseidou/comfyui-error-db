@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】Improve AMD performance. の完全解決ガイド"
+title: "【HuggingFace】Improve AMD performance. の完全解決ガイド"
 description: "ComfyUIのエラー 'Improve AMD performance.' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-13"
 ---

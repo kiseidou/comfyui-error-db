@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】Improve performance with large number of queued prompts の完全解決ガイド"
+title: "【Python】Improve performance with large number of queued prompts の完全解決ガイド"
 description: "ComfyUIのエラー 'Improve performance with large number of queued prompts' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-14"
 ---

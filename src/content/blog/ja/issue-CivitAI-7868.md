@@ -1,6 +1,6 @@
 ---
 
-title: "【ComfyUI】HiDream E1 isn't working at all - ComfyUI portable の完全解決ガイド"
+title: "【CivitAI】HiDream E1 isn't working at all - ComfyUI portable の完全解決ガイド"
 description: "ComfyUIのエラー 'HiDream E1 isn't working at all - ComfyUI portable' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-13"
 

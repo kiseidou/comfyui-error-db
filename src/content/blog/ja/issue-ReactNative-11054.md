@@ -1,6 +1,6 @@
 ---
 
-title: "【ComfyUI】Add unified jobs API with /api/jobs endpoints の完全解決ガイド"
+title: "【ReactNative】Add unified jobs API with /api/jobs endpoints の完全解決ガイド"
 description: "ComfyUIのエラー 'Add unified jobs API with /api/jobs endpoints' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-14"
 

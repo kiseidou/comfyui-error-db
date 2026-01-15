@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】ComfyUI Latest Portable update_comfyui.bat error の完全解決ガイド"
+title: "【CivitAI】ComfyUI Latest Portable update_comfyui.bat error の完全解決ガイド"
 description: "ComfyUI Error: ComfyUI Latest Portable update_comfyui.bat error"
 pubDate: "2026-01-14"
 ---

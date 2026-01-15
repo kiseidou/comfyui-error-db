@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】 (IMPORT FAILED) ComfyUI-PuLID-Flux-Enhanced の完全解決ガイド"
+title: "【HuggingFace】 (IMPORT FAILED) ComfyUI-PuLID-Flux-Enhanced の完全解決ガイド"
 description: "ComfyUIのエラー ' (IMPORT FAILED) ComfyUI-PuLID-Flux-Enhanced' の原因と、初心者でもできる修正手順をステップバイステプで解説します。"
 pubDate: "2026-01-13"
 ---

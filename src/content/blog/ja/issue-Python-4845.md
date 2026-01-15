@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】Torch not being compiled with CUDA enabled の完全解決ガイド"
+title: "【Python】Torch not being compiled with CUDA enabled の完全解決ガイド"
 description: "ComfyUIのエラー 'Torch not being compiled with CUDA enabled' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-14"
 ---

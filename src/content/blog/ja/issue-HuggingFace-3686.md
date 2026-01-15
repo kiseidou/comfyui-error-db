@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】After updating the latest version, a BUG will appear in the prompt queue. の完全解決ガイド"
+title: "【HuggingFace】After updating the latest version, a BUG will appear in the prompt queue. の完全解決ガイド"
 description: "ComfyUIのエラー 'After updating the latest version, a bug will appear in the prompt queue.' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-14"
 ---

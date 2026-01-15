@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】HIP error: invalid device function when running ComfyUI の完全解決ガイド"
+title: "【CivitAI】HIP error: invalid device function when running ComfyUI の完全解決ガイド"
 description: "ComfyUIのエラー 'HIP error: invalid device function when running ComfyUI' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-13"
 ---

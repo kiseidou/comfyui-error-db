@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】[Feature request]: Programmatic use and API の完全解決ガイド"
+title: "【Python】[Feature request]: Programmatic use and API の完全解決ガイド"
 description: "ComfyUIのエラー '[Feature request]: Programmatic use and API' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-13"
 ---

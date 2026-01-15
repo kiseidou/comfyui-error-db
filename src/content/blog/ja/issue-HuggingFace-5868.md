@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】ERROR lora diffusion_model.img_in.weight shape '[3072, 64]' is invalid for input of size 393216 の完全解決ガイド"
+title: "【HuggingFace】ERROR lora diffusion_model.img_in.weight shape '[3072, 64]' is invalid for input of size 393216 の完全解決ガイド"
 description: "ComfyUI Error: ERROR lora diffusion_model.img_in.weight shape '[3072, 64]' is invalid for input of size 393216"
 pubDate: "2026-01-14"
 ---

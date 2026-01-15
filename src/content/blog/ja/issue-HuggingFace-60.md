@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】allows user to save to subfolders の完全解決ガイド"
+title: "【HuggingFace】allows user to save to subfolders の完全解決ガイド"
 description: "ComfyUIのエラー 'allows user to save to subfolders' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-14"
 ---

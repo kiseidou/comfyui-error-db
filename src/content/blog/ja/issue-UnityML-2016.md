@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】Click queue prompt, server stopped and reconnecting の完全解決ガイド"
+title: "【UnityML】Click queue prompt, server stopped and reconnecting の完全解決ガイド"
 description: "ComfyUIのエラー 'Click queue prompt, server stopped and reconnecting' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-14"
 ---

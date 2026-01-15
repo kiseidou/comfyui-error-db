@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】Latent upscale causes black image on some resolutions の完全解決ガイド"
+title: "【UnityML】Latent upscale causes black image on some resolutions の完全解決ガイド"
 description: "ComfyUIのエラー 'Latent upscale causes black image on some resolutions' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-14"
 ---

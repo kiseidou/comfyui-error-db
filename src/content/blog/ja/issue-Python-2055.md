@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】ImportError: cannot import name 'get_full_repo_name' from 'huggingface_hub' の完全解決ガイド"
+title: "【Python】ImportError: cannot import name 'get_full_repo_name' from 'huggingface_hub' の完全解決ガイド"
 description: "ComfyUIのエラー 'ImportError: cannot import name 'get_full_repo_name' from 'huggingface_hub'' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-13"
 ---

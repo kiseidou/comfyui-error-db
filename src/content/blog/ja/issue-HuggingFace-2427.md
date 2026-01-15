@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】AssertionError: Torch not compiled with CUDA enabled の完全解決ガイド"
+title: "【HuggingFace】AssertionError: Torch not compiled with CUDA enabled の完全解決ガイド"
 description: "ComfyUIのエラー 'AssertionError: Torch not compiled with CUDA enabled' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-13"
 ---

@@ -1,10 +1,10 @@
 ---
-title: "【ComfyUI】headdim should be in [64, 96, 128]. の完全解決ガイド"
+title: "【CivitAI】headdim should be in [64, 96, 128]. の完全解決ガイド"
 description: "ComfyUIのエラー 'headdim should be in [64, 96, 128].' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-14"
 ---
 
-### 【ComfyUI】headdim should be in [64, 96, 128]. の完全解決ガイド
+### 【CivitAI】headdim should be in [64, 96, 128]. の完全解決ガイド
 
 #### はじめに
 クリエイターのみなさん、こんなエラーが出て困っていませんか？

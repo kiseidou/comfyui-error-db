@@ -1,10 +1,10 @@
 ---
-title: "【ComfyUI】Cannot update ComfyUI \"as file is beyond symlink\" の完全解決ガイド"
+title: "【UnityML】Cannot update ComfyUI \"as file is beyond symlink\" の完全解決ガイド"
 description: "ComfyUI Error: Cannot update ComfyUI \"as file is beyond symlink\""
 pubDate: "2026-01-14"
 ---
 ```yaml
-title: "【ComfyUI】Cannot update ComfyUI 'as file is beyond symlink' の完全解決ガイド"
+title: "【UnityML】Cannot update ComfyUI 'as file is beyond symlink' の完全解決ガイド"
 description: "ComfyUIのエラー 'Cannot update ComfyUI 'as file is beyond symlink'' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-14"
 ```

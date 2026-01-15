@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】**Exception Message: TypeError: Cannot delete property 'value' of #<BooleanWidget2> ## Stack Trace の完全解決ガイド"
+title: "【CivitAI】**Exception Message: TypeError: Cannot delete property 'value' of #<BooleanWidget2> ## Stack Trace の完全解決ガイド"
 description: "ComfyUIのエラー '**Exception Message: TypeError: Cannot delete property 'value' of #<BooleanWidget2> ## Stack Trace' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-13"
 ---

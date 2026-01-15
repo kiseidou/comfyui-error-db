@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】Seed controls added to Ksamplers の完全解決ガイド"
+title: "【HuggingFace】Seed controls added to Ksamplers の完全解決ガイド"
 description: "ComfyUIのエラー 'Seed controls added to Ksamplers' の原因と、初心者でもできる修正手順をステップバイステプで解説します。"
 pubDate: "2026-01-13"
 ---
@@ -63,4 +63,4 @@ A: 空のlatentからのバッチ処理ではシード制御が適切に働か�
 #### まとめ
 このエラーは初心者にとっても難しく感じますが、ステップバイステップで進めれば必ず解決できます！ 一度試みてみてくださいね。あきらめないで頑張ってみましょう！
 
-以上、「【ComfyUI】Seed controls added to Ksamplers の完全解決ガイド」でした。この記事が皆さんの作業を円滑に進める手助けになれば幸いです。
+以上、「【HuggingFace】Seed controls added to Ksamplers の完全解決ガイド」でした。この記事が皆さんの作業を円滑に進める手助けになれば幸いです。

@@ -127,8 +127,9 @@ def generate_content(issue, repo_config, lang="ja"):
                 yaml_content = match.group(1)
                 # Basic cleanup of common YAML errors we've seen
                 # e.g. **title:** instead of title:
-                # Also handle *title*: etc
+                # Also handle *title*: etc and title**:
                 yaml_check = re.sub(r'^\s*[*]*([a-zA-Z0-9_]+)[*]*\s*:', r'\1:', yaml_content, flags=re.MULTILINE)
+                yaml_check = re.sub(r':\s*\*\*', ':', yaml_check)
                 
                 try:
                     yaml.safe_load(yaml_check)
@@ -146,7 +147,7 @@ def generate_content(issue, repo_config, lang="ja"):
                 elif lang == "zh":
                     raw_md = f'---\ntitle: "【{short_name}】{t_safe} 修复指南"\ndescription: "Fix: {t_safe}"\npubDate: "{datetime.now().strftime("%Y-%m-%d")}"\n---\n{raw_md.strip()}'
                 else:
-                    raw_md = f'---\ntitle: "Fix {t_safe} in {short_name}"\ndescription: "Fix: {t_safe}"\npubDate: "{datetime.now().strftime("%Y-%m-%d")}"\n---\n{raw_md.strip()}'
+                    raw_md = f'---\ntitle: "{short_name}: {t_safe} Fix Guide"\ndescription: "Fix: {t_safe}"\npubDate: "{datetime.now().strftime("%Y-%m-%d")}"\n---\n{raw_md.strip()}'
             
             return raw_md
 
@@ -255,26 +256,43 @@ def main():
             
             success_count_batch = 0
             for issue in issues:
+                # Check for legacy filename (ComfyUI only)
+                legacy_exists_ja = False
+                legacy_exists_en = False
+                legacy_exists_zh = False
+                
+                if repo['short'] == 'ComfyUI':
+                    legacy_name = f"issue-{issue['number']}.md"
+                    if os.path.exists(os.path.join(CONTENT_DIR, "ja", legacy_name)): legacy_exists_ja = True
+                    if os.path.exists(os.path.join(CONTENT_DIR, "en", legacy_name)): legacy_exists_en = True
+                    if os.path.exists(os.path.join(CONTENT_DIR, "zh", legacy_name)): legacy_exists_zh = True
+
                 # 1. Japanese
-                if not os.path.exists(os.path.join(CONTENT_DIR, "ja", f"issue-{repo['short']}-{issue['number']}.md")):
+                target_path_ja = os.path.join(CONTENT_DIR, "ja", f"issue-{repo['short']}-{issue['number']}.md")
+                if not os.path.exists(target_path_ja) and not legacy_exists_ja:
                     art = generate_content(issue, repo, "ja")
-                    save_article(art, issue['number'], repo, "ja")
-                    success_count_batch += 1
-                    total_items += 1
+                    if art:
+                        save_article(art, issue['number'], repo, "ja")
+                        success_count_batch += 1
+                        total_items += 1
                 
                 # 2. English
-                if not os.path.exists(os.path.join(CONTENT_DIR, "en", f"issue-{repo['short']}-{issue['number']}.md")):
+                target_path_en = os.path.join(CONTENT_DIR, "en", f"issue-{repo['short']}-{issue['number']}.md")
+                if not os.path.exists(target_path_en) and not legacy_exists_en:
                     art = generate_content(issue, repo, "en")
-                    save_article(art, issue['number'], repo, "en")
-                    success_count_batch += 1
-                    total_items += 1
+                    if art:
+                        save_article(art, issue['number'], repo, "en")
+                        success_count_batch += 1
+                        total_items += 1
                     
                 # 3. Chinese
-                if not os.path.exists(os.path.join(CONTENT_DIR, "zh", f"issue-{repo['short']}-{issue['number']}.md")):
+                target_path_zh = os.path.join(CONTENT_DIR, "zh", f"issue-{repo['short']}-{issue['number']}.md")
+                if not os.path.exists(target_path_zh) and not legacy_exists_zh:
                     art = generate_content(issue, repo, "zh")
-                    save_article(art, issue['number'], repo, "zh")
-                    success_count_batch += 1
-                    total_items += 1
+                    if art:
+                        save_article(art, issue['number'], repo, "zh")
+                        success_count_batch += 1
+                        total_items += 1
 
                 if success_count_batch > 0 and success_count_batch % 5 == 0: # Faster push for testing
                     git_push_batch(total_items)

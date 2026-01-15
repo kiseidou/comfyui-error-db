@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】File endpoints: use query parameters for NGINX/Caddy compatibility の完全解決ガイド"
+title: "【Python】File endpoints: use query parameters for NGINX/Caddy compatibility の完全解決ガイド"
 description: "ComfyUIのエラー 'File endpoints: use query parameters for NGINX/Caddy compatibility' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-14"
 ---

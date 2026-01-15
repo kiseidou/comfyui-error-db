@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】ComfyUI can't open PNG files as workflows の完全解決ガイド"
+title: "【ReactNative】ComfyUI can't open PNG files as workflows の完全解決ガイド"
 description: "ComfyUIのエラー 'ComfyUI can't open PNG files as workflows' の原因と、初心者でもできる修正手順をステップバイステプで解説します。"
 pubDate: "2026-01-14"
 ---

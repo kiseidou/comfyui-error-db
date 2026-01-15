@@ -1,6 +1,6 @@
 ---
 
-title: "【ComfyUI】New Model: HiDream-I1-Full の完全解決ガイド"
+title: "【UnityML】New Model: HiDream-I1-Full の完全解決ガイド"
 description: "ComfyUIのエラー 'New Model: HiDream-I1-Full' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-13"
 

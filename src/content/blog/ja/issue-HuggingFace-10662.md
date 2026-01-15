@@ -1,6 +1,6 @@
 ---
 
-title: "【ComfyUI】Pinned memory causes error with GGUF model の完全解決ガイド"
+title: "【HuggingFace】Pinned memory causes error with GGUF model の完全解決ガイド"
 description: "ComfyUIのエラー 'Pinned memory causes error with GGUF model' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-13"
 

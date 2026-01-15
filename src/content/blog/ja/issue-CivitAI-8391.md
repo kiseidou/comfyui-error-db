@@ -1,10 +1,10 @@
 ---
-title: "【ComfyUI】mat1 and mat2 shapes cannot be multiplied (1x1 and 768x3072) K sampler issue の完全解決ガイド"
+title: "【CivitAI】mat1 and mat2 shapes cannot be multiplied (1x1 and 768x3072) K sampler issue の完全解決ガイド"
 description: "ComfyUIのエラー 'mat1 and mat2 shapes cannot be multiplied (1x1 and 768x3072) K sampler issue' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-14"
 ---
 
-## 【ComfyUI】mat1 and mat2 shapes cannot be multiplied (1x1 and 768x3072) K sampler issue の完全解決ガイド
+## 【CivitAI】mat1 and mat2 shapes cannot be multiplied (1x1 and 768x3072) K sampler issue の完全解決ガイド
 
 ### はじめに
 こんにちは、クリエイターの皆さん！ComfyUIを使って画像生成やAIアートを楽しんでいる中で「mat1 and mat2 shapes cannot be multiplied (1x1 and 768x3072)」というエラーが出たことありませんか？この記事では、そんなエラーが発生した時にどう対処するべきかを初心者にもわかりやすく解説します。これで安心してComfyUIを使い続けられますよ！

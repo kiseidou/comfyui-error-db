@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】Extremely slow image generation with Flux model on MacOS Apple M4 Pro の完全解決ガイド"
+title: "【HuggingFace】Extremely slow image generation with Flux model on MacOS Apple M4 Pro の完全解決ガイド"
 description: "ComfyUIのエラー 'Extremely slow image generation with Flux model on MacOS Apple M4 Pro' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-14"
 ---

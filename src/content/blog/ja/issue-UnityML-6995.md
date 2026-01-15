@@ -1,6 +1,6 @@
 ---
 
-title: "【ComfyUI】Trying to convert Float8_e4m3fn to the MPS backend but it does not have support for that dtype. の完全解決ガイド"
+title: "【UnityML】Trying to convert Float8_e4m3fn to the MPS backend but it does not have support for that dtype. の完全解決ガイド"
 description: "ComfyUIのエラー 'Trying to convert Float8_e4m3fn to the MPS backend but it does not have support for that dtype.' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-13"
 

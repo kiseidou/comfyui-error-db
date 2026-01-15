@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】Added parameter required_frontend_version in the /system_stats API response の完全解決ガイド"
+title: "【Python】Added parameter required_frontend_version in the /system_stats API response の完全解決ガイド"
 description: "ComfyUIのエラー 'Added parameter required_frontend_version in the /system_stats API response' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-14"
 ---

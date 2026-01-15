@@ -1,6 +1,6 @@
 ---
 
-title: "【ComfyUI】Ability to switch between different graphs の完全解決ガイド"
+title: "【HuggingFace】Ability to switch between different graphs の完全解決ガイド"
 description: "ComfyUIのエラー 'Ability to switch between different graphs' の原因と、初心者でもできる修正手順をステップバイステプで解説します。"
 pubDate: "2026-01-13"
 

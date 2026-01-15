@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】I can't see the comfyui manager. の完全解決ガイド"
+title: "【UnityML】I can't see the comfyui manager. の完全解決ガイド"
 description: "ComfyUIのエラー 'I can't see the comfyui manager.' の原因と、初心者でもできる修正手順をステップバイステプで解説します。"
 pubDate: "2026-01-13"
 ---

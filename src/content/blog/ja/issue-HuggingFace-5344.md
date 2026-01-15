@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】ControlNet' object has no attribute 'device の完全解決ガイド"
+title: "【HuggingFace】ControlNet' object has no attribute 'device の完全解決ガイド"
 description: "ComfyUIのエラー 'ControlNet' object has no attribute 'device' の原因と、初心者でもできる修正手順をステップバイステプで解説します。"
 pubDate: "2026-01-14"
 ---

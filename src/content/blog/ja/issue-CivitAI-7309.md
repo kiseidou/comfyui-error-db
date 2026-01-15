@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】Invalid workflow against zod schema: の完全解決ガイド"
+title: "【CivitAI】Invalid workflow against zod schema: の完全解決ガイド"
 description: "ComfyUIのエラー 'Invalid workflow against zod schema:' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-14"
 ---

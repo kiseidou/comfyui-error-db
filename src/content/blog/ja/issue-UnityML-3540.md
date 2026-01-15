@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】python crashes in Ksampler after MacOS 14.5 update の完全解決ガイド"
+title: "【UnityML】python crashes in Ksampler after MacOS 14.5 update の完全解決ガイド"
 description: "ComfyUI Error: python crashes in Ksampler after MacOS 14.5 update"
 pubDate: "2026-01-14"
 ---
@@ -8,7 +8,7 @@ pubDate: "2026-01-14"
 
 ### フロントマター
 ```yaml
-title: "【ComfyUI】python crashes in Ksampler after MacOS 14.5 update の完全解決ガイド"
+title: "【UnityML】python crashes in Ksampler after MacOS 14.5 update の完全解決ガイド"
 description: "ComfyUIのエラー 'python crashes in Ksampler after MacOS 14.5 update' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-14"
 ```

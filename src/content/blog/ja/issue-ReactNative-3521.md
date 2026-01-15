@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】After the last update black images after few steps on Mac mini M2 pro with Sonoma 14.5 の完全解決ガイド"
+title: "【ReactNative】After the last update black images after few steps on Mac mini M2 pro with Sonoma 14.5 の完全解決ガイド"
 description: "ComfyUIのエラー 'After the last update black images after few steps on Mac mini M2 pro with Sonoma 14.5' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-13"
 ---

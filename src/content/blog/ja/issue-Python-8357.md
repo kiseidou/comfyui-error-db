@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】add support to read pyproject.toml from custom node の完全解決ガイド"
+title: "【Python】add support to read pyproject.toml from custom node の完全解決ガイド"
 description: "ComfyUIのエラー 'add support to read pyproject.toml from custom node' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-14"
 ---

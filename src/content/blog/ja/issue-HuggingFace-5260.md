@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】clip missing: ['text_projection.weight'] の完全解決ガイド"
+title: "【HuggingFace】clip missing: ['text_projection.weight'] の完全解決ガイド"
 description: "ComfyUIのエラー 'clip missing: ['text_projection.weight']' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-14"
 ---

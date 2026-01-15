@@ -1,6 +1,6 @@
 ---
 
-title: "【ComfyUI】view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead. の完全解決ガイド"
+title: "【CivitAI】view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead. の完全解決ガイド"
 description: "ComfyUIのエラー 'view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead.' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-13"
 

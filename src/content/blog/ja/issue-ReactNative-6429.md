@@ -1,10 +1,10 @@
 ---
-title: "【ComfyUI】cannot import name 'ImageNetInfo' from 'timm.data'  の完全解決ガイド"
+title: "【ReactNative】cannot import name 'ImageNetInfo' from 'timm.data'  の完全解決ガイド"
 description: "ComfyUI Error: cannot import name 'ImageNetInfo' from 'timm.data' "
 pubDate: "2026-01-14"
 ---
 ```yaml
-title: "【ComfyUI】cannot import name 'ImageNetInfo' from 'timm.data' の完全解決ガイド"
+title: "【ReactNative】cannot import name 'ImageNetInfo' from 'timm.data' の完全解決ガイド"
 description: "ComfyUIのエラー 'cannot import name 'ImageNetInfo' from 'timm.data'' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-14"
 ```
@@ -28,8 +28,10 @@ pubDate: "2026-01-14"
 ComfyUIはPythonの特定のバージョンと互換性を持っているため、まずその状況を確認します。通常、Portable版であればPythonが既にインストールされています。
 
 ```powershell
-# Pythonのバージョンを確認するコマンド
-python --version
+# Pythonのバージョンを確認するコマンド
+
+python --version
+
 ```
 
 このコマンドを実行し、出力されたバージョンが期待通りであることを確認してください。
@@ -39,8 +41,10 @@ python --version
 次に、`pip`（Pythonパッケージマネージャー）も最新版に更新します。これにより、古い依存関係の解決などがスムーズに行われます。
 
 ```powershell
-# pipを更新
-python -m pip install --upgrade pip
+# pipを更新
+
+python -m pip install --upgrade pip
+
 ```
 
 ### Step 3: 現在インストールされているtimmライブラリのバージョンを確認
@@ -48,8 +52,10 @@ python -m pip install --upgrade pip
 `timm`ライブラリが最新版であることを確認します。既に古いバージョンをインストールしている可能性があります。
 
 ```powershell
-# tmmの現在のバージョンを確認
-pip show timm
+# tmmの現在のバージョンを確認
+
+pip show timm
+
 ```
 
 上記コマンドで表示されたバージョン番号をメモしてください。
@@ -59,7 +65,8 @@ pip show timm
 もし`timm`が最新版（2.1.x以上）になっていない場合、以下のコマンドで更新を行います：
 
 ```powershell
-# timmライブラリを更新
+# timmライブラリを更新
+
 pip install --upgrade timm
 ```
 
@@ -70,10 +77,14 @@ pip install --upgrade timm
 すべてのアップデートが完了したら、ComfyUIを一度完全にシャットダウンし、再起動してください。これにより、新しいライブラリの変更内容が反映されます。
 
 ```powershell
-# ComfyUIを終了
-taskkill /IM comfyui.exe /F
-
-# ComfyUIを起動
+# ComfyUIを終了
+
+taskkill /IM comfyui.exe /F
+
+
+
+# ComfyUIを起動
+
 ComfyUI_windows_portable\bin\comfyui.exe
 ```
 

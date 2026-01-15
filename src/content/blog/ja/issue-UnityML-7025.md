@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】[Announcement] The frontend will no longer be shipped in the main ComfyUI repo, it will be a separate pip package instead. の完全解決ガイド"
+title: "【UnityML】[Announcement] The frontend will no longer be shipped in the main ComfyUI repo, it will be a separate pip package instead. の完全解決ガイド"
 description: "ComfyUIのエラー '[Announcement] The frontend will no longer be shipped in the main ComfyUI repo, it will be a separate pip package instead.' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-13"
 ---

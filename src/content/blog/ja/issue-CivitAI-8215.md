@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】My unclaimed Comfy Registry node suite の完全解決ガイド"
+title: "【CivitAI】My unclaimed Comfy Registry node suite の完全解決ガイド"
 description: "ComfyUI Error: My unclaimed Comfy Registry node suite"
 pubDate: "2026-01-14"
 ---

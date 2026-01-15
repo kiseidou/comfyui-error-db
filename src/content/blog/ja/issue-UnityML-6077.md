@@ -1,5 +1,5 @@
 ---
-title: "【ComfUI】TypeError: forward_orig() got an unexpected keyword argument 'attn_mask' の完全解決ガイド"
+title: "【UnityML】TypeError: forward_orig() got an unexpected keyword argument 'attn_mask' の完全解決ガイド"
 description: "ComfyUIのエラー 'TypeError: forward_orig() got an unexpected keyword argument 'attn_mask'' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-13"
 ---

@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】KSampler Given groups=1, weight of size [320, 4, 3, 3], expected input[2, 8, 96, 96] to have 4 channels, but got 8 channels instead の完全解決ガイド"
+title: "【UnityML】KSampler Given groups=1, weight of size [320, 4, 3, 3], expected input[2, 8, 96, 96] to have 4 channels, but got 8 channels instead の完全解決ガイド"
 description: "ComfyUI Error: KSampler Given groups=1, weight of size [320, 4, 3, 3], expected input[2, 8, 96, 96] to have 4 channels, but got 8 channels instead"
 pubDate: "2026-01-14"
 ---

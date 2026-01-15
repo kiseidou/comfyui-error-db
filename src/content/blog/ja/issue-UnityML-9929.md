@@ -1,10 +1,10 @@
 ---
-title: "【ComfyUI】torch 2.9 incompatible with Pascal architectures の完全解決ガイド"
+title: "【UnityML】torch 2.9 incompatible with Pascal architectures の完全解決ガイド"
 description: "ComfyUIのエラー 'torch 2.9 incompatible with Pascal architectures' の原因と、初心者でもできる修正手順をステップバイステプで解説します。"
 pubDate: "2026-01-14"
 ---
 
-## 【ComfyUI】torch 2.9 incompatible with Pascal architectures の完全解決ガイド
+## 【UnityML】torch 2.9 incompatible with Pascal architectures の完全解決ガイド
 
 ### はじめに
 最近ComfyUIを使ってみようとして、画面が真っ白になったり、 Flux Schnellを動かそうとするとエラーが出たりして困ったことはありませんか？この記事では、「torch 2.9 incompatible with Pascal architectures」というエラーに対処する方法をステップバイステップで詳しく説明します。初心者でも安心して取り組めるように、丁寧に解説しますので、ぜひ最後まで読んでみてください！

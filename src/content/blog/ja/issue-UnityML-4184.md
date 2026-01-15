@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】Memory Optimization issue since \"Better Flux vram estimation\" update の完全解決ガイド"
+title: "【UnityML】Memory Optimization issue since \"Better Flux vram estimation\" update の完全解決ガイド"
 description: "ComfyUI Error: Memory Optimization issue since \"Better Flux vram estimation\" update"
 pubDate: "2026-01-14"
 ---

@@ -1,14 +1,14 @@
 ---
-title: "【ComfyUI】Errors when uploading certain pictures from my cell phone の完全解決ガイド"
+title: "【Python】Errors when uploading certain pictures from my cell phone の完全解決ガイド"
 description: "ComfyUI Error: Errors when uploading certain pictures from my cell phone"
 pubDate: "2026-01-14"
 ---
 ### キャッチーなタイトル:
-**title:** "【ComfyUI】Errors when uploading certain pictures from my cell phone の完全解決ガイド"
+**title:** "【Python】Errors when uploading certain pictures from my cell phone の完全解決ガイド"
 
 
 ```yaml
-title: "【ComfyUI】Errors when uploading certain pictures from my cell phone の完全解決ガイド"
+title: "【Python】Errors when uploading certain pictures from my cell phone の完全解決ガイド"
 description: "ComfyUIのエラー 'Errors when uploading certain pictures from my cell phone' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-14"
 ```

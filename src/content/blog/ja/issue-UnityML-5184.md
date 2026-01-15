@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】Cannot connect to host huggingface.co:443 ssl:default [信号灯超时时间已到] の完全解決ガイド"
+title: "【UnityML】Cannot connect to host huggingface.co:443 ssl:default [信号灯超时时间已到] の完全解決ガイド"
 description: "ComfyUIのエラー 'Cannot connect to host huggingface.co:443 ssl:default [信号灯超時時間已到]' の原因と、初心者でもできる修正手順をステップバイステップで解説します。"
 pubDate: "2026-01-14"
 ---

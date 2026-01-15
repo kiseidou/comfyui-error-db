@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】ClipVision model not found. の完全解決ガイド"
+title: "【CivitAI】ClipVision model not found. の完全解決ガイド"
 description: "ComfyUI Error: ClipVision model not found."
 pubDate: "2026-01-14"
 ---

@@ -1,5 +1,5 @@
 ---
-title: "【ComfyUI】newbie image exp - ksampler \"pooled_output\" の完全解決ガイド"
+title: "【CivitAI】newbie image exp - ksampler \"pooled_output\" の完全解決ガイド"
 description: "ComfyUI Error: newbie image exp - ksampler \"pooled_output\""
 pubDate: "2026-01-14"
 ---
