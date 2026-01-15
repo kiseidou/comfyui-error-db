@@ -1,5 +1,3 @@
-### 标题: "【完美解决】ComfyUI 报错 “TypeError: forward_orig() got an unexpected keyword argument 'attn_mask'” 的修复方法"
-
 ---
 title: "【ComfyUI】TypeError: forward_orig() got an unexpected keyword argument 'attn_mask' 完美解决指南"
 description: "ComfyUI Error fix for TypeError: forward_orig() got an unexpected keyword argument 'attn_mask'"

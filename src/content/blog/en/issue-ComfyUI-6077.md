@@ -1,11 +1,7 @@
-### How to fix 'TypeError: forward_orig() got an unexpected keyword argument 'attn_mask'' in ComfyUI
-
 ---
-
 title: "How to fix 'TypeError: forward_orig() got an unexpected keyword argument 'attn_mask'' in ComfyUI"
 description: "Step-by-step fix for TypeError: forward_orig() got an unexpected keyword argument 'attn_mask'"
 pubDate: "2026-01-15"
-
 ---
 
 ## Explanation and Solution
