@@ -1,3 +1,9 @@
+---
+title: "Issue ReactNative 4968"
+description: "Fix guide for Issue ReactNative 4968"
+pubDate: "2026-01-15"
+---
+
 ## 対策ガイド：パッケージャがモジュールを解決できないエラー
 
 React Nativeなどの開発において、特定のパッケージをインポートしようとしたときに以下のエラーメッセージが表示されることがあります：

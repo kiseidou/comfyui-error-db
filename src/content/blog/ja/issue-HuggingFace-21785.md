@@ -1,3 +1,9 @@
+---
+title: "Issue HuggingFace 21785"
+description: "Fix guide for Issue HuggingFace 21785"
+pubDate: "2026-01-15"
+---
+
 It looks like you're trying to write a solution guide for an issue related to adding the "Pop2Piano" model to HuggingFace, but your description is incomplete and seems more like a template or placeholder text for a pull request (PR) rather than an error message or issue.
 
 To provide a helpful Japanese solution guide, I need to clarify what specific problem or error you're encountering with integrating Pop2Piano into the HuggingFace repository. However, based on common issues encountered when working with models and repositories in such contexts, here is a general guide on how to approach adding a new model like "Pop2Piano" to HuggingFace:

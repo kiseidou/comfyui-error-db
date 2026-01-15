@@ -1,3 +1,9 @@
+---
+title: "Issue UnityML 2731"
+description: "Fix guide for Issue UnityML 2731"
+pubDate: "2026-01-15"
+---
+
 ### Solution Guide: Implementing ISensor Interface for Visual Observations
 
 #### Problem Overview:

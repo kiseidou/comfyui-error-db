@@ -1,11 +1,7 @@
-### How to fix 'Execution Model Inversion' in ComfyUI
-
 ---
-
 title: "How to fix 'Execution Model Inversion' in ComfyUI"
 description: "Step-by-step guide for resolving Execution Model Inversion issues"
 pubDate: "2026-01-15"
-
 ---
 
 ## Introduction
