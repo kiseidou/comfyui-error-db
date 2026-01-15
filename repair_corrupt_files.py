@@ -30,32 +30,53 @@ def repair_file(path):
             yaml_text = match.group(1).strip()
             # Basic cleanup of common YAML errors we've seen
             # e.g. **title:** instead of title:
-            # Also handle *title*: etc
+            # Also handle *title*: and title**:
+            # Regex Explanation:
+            # ^\s*       : Start of line, optional whitespace
+            # [*]*       : Optional leading asterisks
+            # ([a-zA-Z0-9_]+) : The key (alphanumeric+underscore) capture group 1
+            # [*]*       : Optional trailing asterisks BEFORE matches colon
+            # \s*        : Optional whitespace
+            # :          : Colon
             yaml_text_clean = re.sub(r'^\s*[*]*([a-zA-Z0-9_]+)[*]*\s*:', r'\1:', yaml_text, flags=re.MULTILINE)
+            
+            # HANDLE ASTERISKS AFTER COLON (e.g. title:** "...")
+            yaml_text_clean = re.sub(r':\s*\*\*', ':', yaml_text_clean)
+            
+            # Also handle cases with missing colon if commonly seen, e.g. title** "Value"
+            # But let's stick to standard YAML fix first.
             
             try:
                 existing_yaml = yaml.safe_load(yaml_text_clean)
                 if isinstance(existing_yaml, dict):
+                    # sanitize keys if they still have asterisks (paranoid check)
+                    clean_yaml = {}
+                    for k, v in existing_yaml.items():
+                         clean_key = k.replace('*', '').strip()
+                         clean_yaml[clean_key] = v
+                    existing_yaml = clean_yaml
+
                     if "title" in existing_yaml and "pubDate" in existing_yaml:
                         has_valid_frontmatter = True
                         
                         # CRITICAL: Even if valid, we must ensure it is at the very START of the file.
-                        # Cloudflare/Astro fails if there is text before the first ---
                         if match.start() > 0:
                              print(f"🔧 Trimming leading garbage from {os.path.basename(path)}...")
-                             has_valid_frontmatter = False # Force "repair" which effectively just rewrites it cleanly
-                             existing_yaml = existing_yaml # Keep the data
+                             has_valid_frontmatter = False 
                         
                         if yaml_text != yaml_text_clean:
-                           # If we just fixed the bold keys, force usage of clean yaml
+                           # If we just fixed the bold keys, force rewrite
                            has_valid_frontmatter = False 
+                           
+                        # Additional check: If keys had asterisks that regex didn't catch inside existing_yaml
+                        # (e.g. if PyYAML loaded 'title**' as a key)
+                        if any('*' in k for k in yaml.safe_load(yaml_text).keys()):
+                             has_valid_frontmatter = False
 
             except Exception:
                 pass # Invalid YAML, we will try to repair
         
         if has_valid_frontmatter:
-            # If strictly valid, no need to touch, unless we want to enforce formatting.
-            # For now, let's leave valid files alone to minimize churn.
             return True
 
         # --- REPAIR LOGIC ---
