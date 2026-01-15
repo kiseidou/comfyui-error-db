@@ -188,41 +188,33 @@ def self_diagnose():
         else:
             os.makedirs(path, exist_ok=True)
 
-    # --- NEW: Corrupt File Sweeper ---
-    print("🧹 Scanning for corrupt articles...")
+    # --- NEW: Corrupt File Sweeper (Repair Mode) ---
+    print("🧹 Scanning for corrupt articles and attempting repair...")
+    from repair_corrupt_files import repair_file
+
     valid_count = 0
+    repaired_count = 0
     deleted_count = 0
+    
     for root, dirs, files in os.walk(CONTENT_DIR):
         for f in files:
             if f.endswith(".md"):
                 path = os.path.join(root, f)
                 try:
-                    with open(path, 'r', encoding='utf-8') as file:
-                        content = file.read()
-                    
-                    # Check for Valid Frontmatter
-                    match = re.search(r'^---\s*\n(.*?)\n---\s*\n', content, re.DOTALL | re.MULTILINE)
-                    is_valid = False
-                    
-                    if match:
-                        yaml_text = match.group(1).strip()
-                        if yaml_text:
-                            if "title:" in yaml_text and "pubDate:" in yaml_text:
-                                is_valid = True
-                    
-                    if not is_valid:
-                        print(f"💣 Deleting corrupt file (Bad Frontmatter): {f}")
-                        try:
-                            os.remove(path)
-                            deleted_count += 1
-                        except: pass
-                    else:
+                    # repair_file returns True if valid/repaired, False if effectively empty/unusable
+                    if repair_file(path):
                         valid_count += 1
+                        # We don't distinguish valid vs repaired in return boolean easily without changing signature,
+                        # but the script prints logs. We'll simply count "survived" files.
+                    else:
+                        print(f"💣 Deleting unrecoverable file: {f}")
+                        os.remove(path)
+                        deleted_count += 1
                         
                 except Exception as e:
                     print(f"⚠️ Error checking {f}: {e}")
                     
-    print(f"✅ Diagnosis Complete. Valid: {valid_count}, Deleted: {deleted_count}")
+    print(f"✅ Diagnosis Complete. Verified/Repaired: {valid_count}, Deleted: {deleted_count}")
 
 def main():
     print("=== ComfyUI Error Database Factory v3.4 (With Safety Check) ===")
