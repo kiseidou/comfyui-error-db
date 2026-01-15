@@ -1,11 +1,7 @@
-### How to fix 'After the last update black images after few steps on Mac mini M2 pro with Sonoma 14.5' in ComfyUI
-
 ---
-
 title: "How to fix 'After the last update black images after few steps on Mac mini M2 pro with Sonoma 14.5' in ComfyUI"
 description: "Step-by-step fix for After the last update black images after few steps on Mac mini M2 pro with Sonoma 14.5"
 pubDate: "2026-01-15"
-
 ---
 
 If you're experiencing issues where your images turn black after a few steps in ComfyUI on a Mac mini M2 Pro running macOS Sonoma 14.5, this guide will help you resolve the problem.

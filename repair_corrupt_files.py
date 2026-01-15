@@ -30,17 +30,26 @@ def repair_file(path):
             yaml_text = match.group(1).strip()
             # Basic cleanup of common YAML errors we've seen
             # e.g. **title:** instead of title:
-            yaml_text_clean = yaml_text.replace('**title:**', 'title:').replace('**description:**', 'description:').replace('**pubDate:**', 'pubDate:')
+            # Also handle *title*: etc
+            yaml_text_clean = re.sub(r'^\s*[*]*([a-zA-Z0-9_]+)[*]*\s*:', r'\1:', yaml_text, flags=re.MULTILINE)
             
             try:
                 existing_yaml = yaml.safe_load(yaml_text_clean)
                 if isinstance(existing_yaml, dict):
                     if "title" in existing_yaml and "pubDate" in existing_yaml:
                         has_valid_frontmatter = True
+                        
+                        # CRITICAL: Even if valid, we must ensure it is at the very START of the file.
+                        # Cloudflare/Astro fails if there is text before the first ---
+                        if match.start() > 0:
+                             print(f"🔧 Trimming leading garbage from {os.path.basename(path)}...")
+                             has_valid_frontmatter = False # Force "repair" which effectively just rewrites it cleanly
+                             existing_yaml = existing_yaml # Keep the data
+                        
                         if yaml_text != yaml_text_clean:
-                           # If we just fixed the bold keys, re-save with clean yaml
-                           pass # We will fall through to re-saving logic if we want to force standardization, 
-                                # but for now let's assume if it parses, we can fix it.
+                           # If we just fixed the bold keys, force usage of clean yaml
+                           has_valid_frontmatter = False 
+
             except Exception:
                 pass # Invalid YAML, we will try to repair
         
